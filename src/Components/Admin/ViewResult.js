@@ -1,13 +1,22 @@
 import React, { useEffect,useState,useContext } from 'react'
 import Table from './Table';
 import QuizContext from '../../Context/QuizContext';
-import {useLocation} from 'react-router-dom';
+import {useLocation,useHistory} from 'react-router-dom';
 function ViewResult() {
   const location = useLocation()
-  const {_id,classs } = location.state
+  let _id,classs 
+  let history=useHistory()
   const context=useContext(QuizContext);
     const {results,setresults}=context;
     useEffect(async()=>{
+      
+        if(!localStorage.getItem('token'))
+        {
+          history.push('../loginadmin')
+        }
+    else{
+      _id=location.state._id;
+      classs=location.state.classs
         const response1 = await fetch("http://localhost:5000/admin/viewresults", {
             method: 'POST',
             headers: {
@@ -19,6 +28,7 @@ function ViewResult() {
         const json = await response1.json();
         json.sort((a, b) => a.name.localeCompare(b.name))
         setresults(json)
+    }
     },[])
   return (
     <table className="table">

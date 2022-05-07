@@ -4,10 +4,8 @@ import AdQuizItem from './AdQuizItem';
 function Admin() {
   let history=useHistory();
     const [adquiz,setadquiz]=useState([]);
-    const handleclick=()=>{
-      history.push('/admin/createquiz');
-    }
 useEffect(async () => {
+  if(localStorage.getItem('token')){
         const response = await fetch("http://localhost:5000/admin", {
             method: 'GET',
             headers: {
@@ -16,6 +14,10 @@ useEffect(async () => {
         })
         const json = await response.json();
         setadquiz(json);
+      }
+      else{
+        history.push('./loginadmin')
+      }
       },[]);
   return (
     <>
@@ -28,7 +30,7 @@ useEffect(async () => {
         </div>
         })} 
         </div>
-      <button className="btn btn-primary my-3" onClick={handleclick}>Create New Quiz</button>
+      
       </div>
 
       </>

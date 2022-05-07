@@ -1,4 +1,5 @@
 import React, { useEffect,useRef, useState } from 'react'
+import '../../Css/Clock.css'
 import { set } from 'react-hook-form';
 function Clock(props) {
     const end=props.end;
@@ -20,6 +21,8 @@ function Clock(props) {
         if(minutes<10)
         minutes="0"+minutes
         let seconds=Math.floor((distance%(1000*60)/(1000)));
+        if(seconds<10)
+        seconds="0"+seconds
         
           if(distance<0)
           {
@@ -42,11 +45,14 @@ function Clock(props) {
       }
     });
   return (
-    <div className='d-flex'>
-       <h3>{hours}</h3> 
-      <h3>{minutes}</h3>
-      <h3>{seconds}</h3> 
-      </div>
+    // <div className='d-flex' style={{"border":"5px solid red"}}>
+    //    <h3>{hours}:</h3> 
+    //   <h3>{minutes}:</h3>
+    //   <h3>{seconds}</h3> 
+    //   </div>
+   
+   <span id="clock"  >{hours}:{minutes}:{seconds}</span>
+
   )
 }
 

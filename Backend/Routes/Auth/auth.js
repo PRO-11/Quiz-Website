@@ -23,7 +23,7 @@ async (req, res) => {
 
   let user=await Admin.findOne({user_id:req.body.user_id});
   if(user)
-  return res.status(400).end("Error User already exxist");
+  return res.status(400).json({msg:" UserId Exist"});
   
   const salt=await bcrypt.genSalt(10)
 const secpass=await bcrypt.hash(req.body.password,salt);
@@ -39,7 +39,8 @@ user=await Admin.create({
     }
   }
   const authtoken=jwt.sign(data,jwt_SECRET)
-  res.json({authtoken}) 
+  let success=JSON.stringify("SUUCESS");
+  res.json({success,authtoken}) 
 }
 catch(err){
 res.status(401).send("Internal Server Error");
@@ -105,7 +106,7 @@ async (req, res) => {
 
   let user=await User.findOne({user_id:req.body.user_id});
   if(user)
-  return res.status(400).end({success,error:"Error User already exxist"});
+  return res.status(400).json({msg:" UserId Exist"});
   
   const salt=await bcrypt.genSalt(10)
 const secpass=await bcrypt.hash(req.body.password,salt);

@@ -2,7 +2,9 @@ import React, { useState,useContext } from 'react'
 import { Link } from 'react-router-dom'
 import {useHistory} from "react-router-dom"
 import QuizContext from '../../Context/QuizContext';
-function Loginadmin() {
+import userimg from '../../Images/user.png'
+import lockimg from '../../Images/lock .png'
+function Loginadmin(props) {
     const context=useContext(QuizContext);
     let history=useHistory()
 const [credentials,setcred]=useState({user_id:"",password:" "})
@@ -19,6 +21,7 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
    if(json.success)
    {
        localStorage.setItem('token',json.authtoken);
+       props.showalert("Success","Login is Successful")
        history.push("/admin")
    }
    else{
@@ -29,20 +32,30 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
          setcred({...credentials,[e.target.name]:e.target.value})
      }
     return (
-        <>
+        <section   id="login">
+        <div className="box">
+          <div className="form">
+            <h2>LOGIN ADMIN</h2>
         <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">UserId</label>
-                <input type="text" name="user_id" className="form-control" onChange={onchange} id="user_id" aria-describedby="emailHelp" minLength={7} />
+           <div className="inputBx">
+                <label htmlFor="exampleInputEmail1"  >UserId</label>
+                <input type="text" name="user_id" placeholder='UserID' onChange={onchange} id="user_id" aria-describedby="emailHelp" minLength={7} />
+               <img src={userimg} />
+                </div>
+
+                <div className="inputBx">
+                <label htmlFor="exampleInputPassword1" >Password</label>
+                <input type="password" placeholder="Password" name="password"  onChange={onchange} id="password" />
+                <img src={lockimg}/>
             </div>
-            <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input type="password" name="password" className="form-control" onChange={onchange} id="password" minLength={5}/>
+            <div className="inputBx">
+            <input type="submit" value="Login"/>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <Link className="my-3" to="/createadmin">Create New Admin</Link>
-        </>
+        <p>Need an <Link to="/createadmin" style={{color:"black"}}> Account?</Link></p>
+        </div>
+        </div>
+ </section>
     )
 }
 

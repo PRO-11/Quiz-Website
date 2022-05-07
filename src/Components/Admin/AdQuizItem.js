@@ -1,4 +1,5 @@
 import React, { useEffect ,useState} from 'react'
+import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom';
 function AdQuizItem(props) {
     let classs=props.quiz.class
@@ -20,6 +21,7 @@ function AdQuizItem(props) {
     },[])
   
   return (
+    
 <div className="card">
   <div className="card-body ">
 <div className="row">
@@ -44,7 +46,7 @@ function AdQuizItem(props) {
 </div>
     </div>
      
-  </div>
+  </div> 
 
  )
 }

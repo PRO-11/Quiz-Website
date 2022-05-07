@@ -1,0 +1,45 @@
+
+#userquiz{
+  margin-left:0;
+ 
+     
+}
+#userquiz label.radio {
+   cursor: pointer;
+}
+#userquiz  p {
+font-size: 1.3rem;
+border: 2px solid black;
+}
+#userquiz  label.radio input {
+  
+background: antiquewhite;
+}
+
+#userquiz  label.radio span {
+   padding: 4px 0px;
+   border: 1px solid red;
+   display: inline-block;
+   color: red;
+   width: 100px;
+   text-align: center;
+   border-radius: 3px;
+   margin-top: 7px;
+   text-transform: uppercase
+}
+
+
+#userquiz  .ans {
+   margin-left: 26px !important;
+   font-size: large;
+}
+
+#userquiz  .btn:focus {
+   outline: 0 !important;
+   box-shadow: none !important
+}
+
+#userquiz  .btn:active {
+   outline: 0 !important;
+   box-shadow: none !important
+}

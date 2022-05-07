@@ -1,6 +1,6 @@
-import './App.css';
-import  React from 'react'
-import Navbar from './Components/Navbar';
+import  React, { useContext,useState } from 'react'
+import Navbar from './Components/Admin/Navbar';
+import NavbarStudent from './Components/User/NavbarStudent';
 import Loginuser from './Components/Login/Loginuser'
 import Loginadmin from './Components/Login/Loginadmin'
 import Createuser from './Components/Login/Createuser';
@@ -11,41 +11,56 @@ import Createquiz1 from './Components/Admin/Createquiz1'
 import Createquiz from './Components/Admin/Createquiz'
 import Startquiz from './Components/User/Startquiz'
 import ViewResult from './Components/Admin/ViewResult'
+import QuizContext from './Context/QuizContext';
+import QuizState from './Context/QuizState';
+import Home from './Components/Home';
+import Alert from './Alert'
 import {
   BrowserRouter,
  Switch,
   Route
 } from "react-router-dom";
-import QuizState from './Context/QuizState';
-import Home from './Components/Home';
 const App = () => {
+  const [alert,setalert]=useState(null);
+ const showalert=(type,msg)=>{
+     setalert({
+       type:type,
+       msg:msg
+     })
+     setTimeout(() => {
+       setalert(null)
+     }, 3000);
+  }
+  const context=useContext(QuizContext);
   return (
     <div>
       <QuizState>
       <BrowserRouter> 
-    <Navbar/>
-    
      <div className='container'>
        <Switch> 
        <Route exact path="/">
           <Home/>
           </Route>
-          <Route exact path="/loginuser">
-          <Loginuser/>
+          <Route exact path="/loginuser" >
+          <Loginuser showalert={showalert}/>
           </Route>
-          <Route exact path="/loginadmin">
-          <Loginadmin/>
+          <Route exact path="/loginadmin" >
+          <Loginadmin showalert={showalert} />
           </Route>
           <Route exact path="/createuser">
-          <Createuser/>
+          <Createuser showalert={showalert}/>
           </Route>
           <Route exact path="/createadmin">
-          <Createadmin/>
+          <Createadmin showalert={showalert}/>
           </Route>
           <Route exact path="/user">
+            <NavbarStudent/>
+            <Alert alert={alert}/>
           <User/>
           </Route>
           <Route exact path="/admin">
+            <Navbar/>
+            <Alert  alert={alert}/>
           <Admin/>
           </Route>
           <Route exact path="/admin/createquiz">

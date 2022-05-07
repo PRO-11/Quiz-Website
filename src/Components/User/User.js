@@ -1,11 +1,12 @@
 import React,{useEffect,useState,useContext} from 'react'
-import QuizContext from '../../Context/QuizContext';
 import QuizItem from './QuizItem';
+import {useHistory} from "react-router-dom"
 function User() {
+  let history=useHistory()
   const [userquiz,setuserquiz]=useState([]);
    const [user,setuser]=useState({});
 useEffect(async () => {
-  
+ if(localStorage.getItem('token')){
   const response1 = await fetch("http://localhost:5000/user/getuser", {
       method: 'GET',
       headers: {
@@ -22,6 +23,10 @@ useEffect(async () => {
   })
   const json = await response.json();
    setuserquiz(json.ans); 
+}
+else{
+history.push('/loginuser')
+}
 
 return()=>{
   

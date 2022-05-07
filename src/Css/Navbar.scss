@@ -1,0 +1,20 @@
+
+.nav {
+	position: sticky;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	top: 0;
+}
+
+.nav {
+	background: #68e15b;
+	&__title {
+		margin: 0px 30px;
+	}
+	&__item {
+		display: inline-block;
+		margin: 0px 30px;
+	}
+}

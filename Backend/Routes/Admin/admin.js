@@ -5,6 +5,7 @@ const User=require('../../Models/User');
 const fetchadmin=require('../../Middleware/fetchadmin')
 const quiz=require('../../Models/quiz');
 router.post('/createquiz',fetchadmin,async (req,res)=>{
+    try{
 const userId=req.user.id;
 let user=await Admin.findOne({_id:userId}).select("user_id")
 console.log(req.body.quiz)
@@ -19,14 +20,26 @@ let abc=await quiz.create({
    totalmarks:req.body.totalmarks
 })
 res.status(200).json("Succesfully Created")
+    }
+    catch(e)
+    {
+      console.log(e)
+    }
 })
 router.get('/',fetchadmin,async(req,res)=>{
+  try{
     const userId=req.user.id;
     let user=await Admin.findOne({_id:userId}).select("user_id")
     const ans=await quiz.find({admin:user.user_id});
     res.json(ans);
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
 })
 router.post('/viewresults',fetchadmin,async(req,res)=>{
+    try{
     const userId=req.user.id;
     let classs=req.body.class;
     let quizid=req.body.quizid;
@@ -50,5 +63,10 @@ router.post('/viewresults',fetchadmin,async(req,res)=>{
     })
 
     res.json(arr);
+}
+catch(e)
+  {
+    console.log(e)
+  }
 })
 module.exports=router;

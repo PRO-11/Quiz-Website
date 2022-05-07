@@ -4,8 +4,9 @@ import {useHistory} from "react-router-dom"
 import userimg from '../../Images/user.png'
 import lockimg from '../../Images/lock .png'
 import '../../Css/Login.css'
-function Loginuser() {
+function Loginuser(props) {
     let history=useHistory()
+ 
 const [credentials,setcred]=useState({user_id:"",password:" "})
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +21,7 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
    if(json.success)
    {
        localStorage.setItem('token',json.authtoken);
+       props.showalert("Success","Login is Successful")
        history.push("/user")
    }
    else{
@@ -33,10 +35,10 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
 }
      
     return (
-      <section>
+      <section   id="login">
         <div className="box">
           <div className="form">
-            <h2>Login</h2>
+            <h2>LOGIN USER</h2>
         <form onSubmit={handleSubmit}>
            <div className="inputBx">
                 <label htmlFor="exampleInputEmail1"  >UserId</label>
@@ -46,14 +48,14 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
 
                 <div className="inputBx">
                 <label htmlFor="exampleInputPassword1" >Password</label>
-                <input type="password" placeholder="Password" name="password"  onChange={onchange} id="password" minLength={5}/>
+                <input type="password" placeholder="Password" name="password"  onChange={onchange} id="password" />
                 <img src={lockimg}/>
             </div>
             <div className="inputBx">
             <input type="submit" value="Login"/>
             </div>
         </form>
-        <p>Need an <Link to="/createuser"> Account</Link></p>
+        <p>Need an <Link to="/createuser" style={{color:"black"}}> Account?</Link></p>
         </div>
         </div>
  </section>

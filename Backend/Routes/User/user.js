@@ -4,6 +4,7 @@ const quiz=require('../../Models/quiz');
 const User=require('../../Models/User');
 const router=express.Router();
 router.get('/',fetchadmin,async (req,res)=>{
+  try{
     let userid=req.user.id;
     let success=false;
     let user=await User.findOne({_id:userid}).select("class");
@@ -38,6 +39,11 @@ router.get('/',fetchadmin,async (req,res)=>{
    })
    success=true;
    res.json({success,ans}); 
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
 })
 router.post('/submitquiz',fetchadmin,async (req,res)=>
 {

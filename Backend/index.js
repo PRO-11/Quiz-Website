@@ -1,5 +1,7 @@
 const connectToMongo = require('./db')
 connectToMongo();
+
+
 const express = require("express")
 const User = require('./Models/User');
 const quiz = require('./Models/quiz');
