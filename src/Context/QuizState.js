@@ -7,7 +7,7 @@ function QuizState(props) {
 
    const [results,setresults]=useState([]);
   let ans=new Array;
-
+   
   return (
     <QuizContext.Provider value={{results,setresults,ans}}>
         {props.children}

@@ -35,6 +35,28 @@ const setquizmarks = async(id, classs) => {
       }
    })
 };
+function gettime(start,end)
+{
+ let endhr=Math.floor((end/60));
+let endmin=end-endhr*60;
+let hrst= Number(start.substring(0, 2));
+let minst=Number(start.substring(3, 5));
+let secst = start.substring(6, 8);
+
+endmin=(endmin+minst);
+let flag=0;
+if(endmin>59)
+{
+ flag=1;
+ endmin-=60;
+}
+endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
+if(Number(endhr)<10)
+endhr="0"+endhr;
+if(Number(endmin)<10)
+endmin="0"+endmin;
+return endhr+":"+endmin+":"+secst;
+}
 const calculate = (date) => {
    let str = "";
    for (let i = 0; i < date.length; i++) {
@@ -42,7 +64,6 @@ const calculate = (date) => {
          break;
       str += date[i];
    }
-   // console.log(str)
    str = str.split('/')
    let ans = "";
    ans += str[2] + '-';
@@ -54,19 +75,23 @@ const calculate = (date) => {
    ans += str[1];
    return ans;
 }
-const abc = async () => {
+const checkquiz = async () => {
    let allquiz = await quiz.find();
    allquiz.forEach((element) => {
-      let end = element.end;
-      end1 = end.toISOString().substring(0, 10);
-      let date1 = new Date().toLocaleString();
-      date1 = calculate(date1);
-      let time1 = end.toISOString().substring(11, 19);
-      let hour = new Date().getHours()
-      let min = new Date().getMinutes()
-      let sec = new Date().getSeconds()
-      if (Number(min) < 10) {
-         min = '0' + min;
+      let start = element.start;
+      let end=element.end;
+     let start1 = start.toISOString().substring(0, 10);
+     
+     let date1 = new Date().toLocaleString();
+     date1 = calculate(date1);
+     
+     let time1=gettime(start.toISOString().substring(11,19),end);
+   //   console.log(time1);
+     let hour = new Date().getHours()
+     let min = new Date().getMinutes()
+     let sec = new Date().getSeconds()
+     if (Number(min) < 10) {
+        min = '0' + min;
       }
       if (Number(hour) < 10) {
          hour = '0' + hour;
@@ -75,7 +100,8 @@ const abc = async () => {
          sec = '0' + sec;
       }
       let time2 = hour + ":" + min + ":" + sec;
-      if (end1 === date1 && time1 === time2) {
+      if (start1 === date1 && time1 === time2) {
+         console.log("abccajcsn")
          id=JSON.stringify(element._id)
          setquizmarks(id, element.class);
       }
@@ -84,7 +110,7 @@ const abc = async () => {
 }
 
 setInterval(() => {
-   abc();
+   checkquiz();
 }, 1000)
 
 

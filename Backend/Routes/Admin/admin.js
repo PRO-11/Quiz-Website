@@ -8,7 +8,6 @@ router.post('/createquiz',fetchadmin,async (req,res)=>{
     try{
 const userId=req.user.id;
 let user=await Admin.findOne({_id:userId}).select("user_id")
-console.log(req.body.quiz)
 let abc=await quiz.create({
    admin:user.user_id,
    quiz:req.body.quiz,
@@ -31,7 +30,8 @@ router.get('/',fetchadmin,async(req,res)=>{
     const userId=req.user.id;
     let user=await Admin.findOne({_id:userId}).select("user_id")
     const ans=await quiz.find({admin:user.user_id});
-    res.json(ans);
+    let admin=await Admin.findOne({_id:userId}).select("name")
+    res.json({ans,admin});
   }
   catch(e)
   {

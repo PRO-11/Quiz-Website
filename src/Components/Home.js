@@ -9,17 +9,31 @@ function Home() {
   }
   return (
     <section id="homepage">
-      <button style={{ "--content": "Hover me!" }} onClick={() => handleclick('admin')}>
+    <div className="bghome"></div>
+    <div className="bghome bg2"></div>
+    <div className="bghome bg3"></div>
+    <div className="content">
+      
+      
+    <button className="mx-5" onClick={() => handleclick('admin')}>ADMIN</button>
+  <button className="mx-5" onClick={() => handleclick('user')}>STUDENT</button>
+  <div className="left">
+  </div>
+  
+  <div className="right">
+  </div>
+
+      {/* <section id="homepage">
         <div className="left"></div>
         ADMIN
         <div className="right"></div>
-      </button>
-      <button className="mx-3" style={{ "--content": "Hover me!" }} onClick={() => handleclick('user')}>
         <div className="left"></div>
         STUDENT
         <div className="right"></div>
-      </button>
-     </section>
+        </button>
+      </section> */}
+    </div>
+    </section>
   )
 }
 

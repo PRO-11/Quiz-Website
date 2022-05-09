@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory ,Link} from "react-router-dom"
 import userimg from '../../Images/user.png'
+import Alert from '../../Alert'
 import lockimg from '../../Images/lock .png'
 function Createuser(props) {
     let history = useHistory();
@@ -22,12 +23,16 @@ function Createuser(props) {
             props.showalert("Success","Registered is Successful")
             history.push("/user")
         }
+        else{
+            props.showalert("Failed","Incorrect Credentials")
+        }
     }
     const onchange = (e) => {
         setcred({ ...credentials, [e.target.name]: e.target.value })
     }
     return (
         <section   id="login">
+             <Alert  alert={props.alert}/>
         <div className="box">
           <div className="form">
             <h2>REGISTER</h2>

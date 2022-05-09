@@ -1,5 +1,6 @@
 import React, { useEffect,useState,useContext } from 'react'
 import Table from './Table';
+import '../../Css/Result.css'
 import QuizContext from '../../Context/QuizContext';
 import {useLocation,useHistory} from 'react-router-dom';
 function ViewResult() {
@@ -31,24 +32,47 @@ function ViewResult() {
     }
     },[])
   return (
-    <table className="table">
-  <thead>
-    <tr>
-    <th scope="col">S.NO</th>
-      <th scope="col">Name</th>
-      <th scope="col">UserId</th>
-      <th scope="col">Class</th>
-      <th scope="col">Marks</th>
-    </tr>
-  </thead>
-  <tbody>
-  {results.map((res,index)=>{
+//     <table className="table">
+//   <thead>
+//     <tr>
+//     <th scope="col">S.NO</th>
+//       <th scope="col">Name</th>
+//       <th scope="col">UserId</th>
+//       <th scope="col">Class</th>
+//       <th scope="col">Marks</th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//   {results.map((res,index)=>{
+//      return  <tr key={res.userid}>
+//      <Table res={res} index={index+1}/>
+//     </tr>
+//     })} 
+//   </tbody>
+// </table>
+<section id="result">
+      <h1>Results</h1><br/>
+      <article>
+           <table>
+             <thead>
+            <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>UserId</th>
+            <th>Class</th>
+            <th>Marks</th>
+           </tr>
+           </thead>
+           <tbody>
+           {results.map((res,index)=>{
      return  <tr key={res.userid}>
      <Table res={res} index={index+1}/>
     </tr>
-    })} 
-  </tbody>
-</table>
+    })}
+      </tbody>
+       </table>
+    </article>
+    </section>
 
   )
 }

@@ -1,52 +1,78 @@
 import React, { useEffect ,useState} from 'react'
-import Card from 'react-bootstrap/Card'
+import '../../Css/QuizCard.css'
 import { Link } from 'react-router-dom';
+import '../../Css/enablebt.css'
 function AdQuizItem(props) {
     let classs=props.quiz.class
     const {admin,sub_name,start,end,quizname,_id}=props.quiz;
-    const [diff,setdiff]=useState(-1);
-    const viewquiz=()=>{
-           
+    let startda = start.substring(0, 10);
+    let starttime = start.substring(11, 19)
+    const [enablebt,setenable]=useState(0);
+    const [enableview,setenableview]=useState(0);
+    function gettime(start,end)
+    {
+      let endhr=Math.floor((end/60));
+      let endmin=end-endhr*60;
+      let hrst= Number(start.substring(11, 13));
+      let minst=Number(start.substring(14, 16));
+      let secst = start.substring(17, 19);
+      endmin=(endmin+minst);
+      let flag=0;
+      if(endmin>59)
+      {
+        flag=1;
+        endmin-=60;
+      }
+       endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
+      if(Number(endhr)<10)
+       endhr="0"+endhr;
+      if(Number(endmin)<10)
+       endmin="0"+endmin;
+      return endhr+":"+endmin+":"+secst;
     }
     useEffect(async ()=>{
       if(start){
-      let s = start.substring(0, 10);
-      let b = start.substring(11, 19)
-      let anss = s + " " + b;
-      let startt = new Date(anss)
-      let countDown = startt.getTime();
-      const now = new Date().getTime();
-      setdiff(now-countDown);
+        let startdaa = startda + " " + starttime;
+        let startdate = new Date(startdaa)
+        let endti=gettime(start,end)
+        let enda = startda + " " + endti;
+        let enddate= new Date(enda)
+        let countDown2 = enddate.getTime();
+        const now = new Date().getTime();
+        if(now>=countDown2)
+        setenableview(1);
     }
     },[])
   
   return (
-    
-<div className="card">
+    <div style={{width:'25em'}}>
+<div className="card" id="card">
   <div className="card-body ">
 <div className="row">
-  <div className="col-md-8">{quizname}</div>
-  <div className="col-6 col-md-4 "> Teacher:{admin}</div>
+  <div className="col-md-6">Quizname: {quizname}</div>
+  <div className="col-md-6 my-2">Class:{classs}</div>
 </div>
 
 <div className="row">
-  <div className="col-6 col-md-4">Subject:{sub_name}</div>
-  <div className="col-6 col-md-4">Start:{start}</div>
+  <div className="col-md-6 my-2">Subject:{ sub_name}</div>
+       <div className="col-md-6 my-2">Time Limit: {end} Minutes</div>
 </div>
 
-
+    <div className="row">   
+       <div className="col-md-6 my-2">Start Date: {startda}</div>
+<div className="col-md-6 my-2">Start Time :{starttime}</div>
+        </div>
 <div className="row">
-  <div className="col-6 col-md-4">Class:{classs}</div>
-  <div className="col-6 col-md-4">End:{end}</div>
-  <button className="col-6 col-md-4" onClick={viewquiz} >view Quiz</button>
-  {diff>=0&&<Link className="col-3"to={{
-            pathname: "/admin/viewresults",
-            state: { _id,classs }
-          }}>View Results</Link>}
+  {(enableview==1)&&<Link className="col-md-4 my-2" id="resultbt" to={{
+    pathname: "/admin/viewresults",
+    state: { _id,classs }
+  }}>View Results</Link>}
+  <Link className="col-md-8 my-2" id="viewbt" to="#">View Quiz</Link>
 </div>
     </div>
      
   </div> 
+  </div>
 
  )
 }

@@ -1,6 +1,4 @@
 import  React, { useContext,useState } from 'react'
-import Navbar from './Components/Admin/Navbar';
-import NavbarStudent from './Components/User/NavbarStudent';
 import Loginuser from './Components/Login/Loginuser'
 import Loginadmin from './Components/Login/Loginadmin'
 import Createuser from './Components/Login/Createuser';
@@ -31,7 +29,6 @@ const App = () => {
        setalert(null)
      }, 3000);
   }
-  const context=useContext(QuizContext);
   return (
     <div>
       <QuizState>
@@ -42,26 +39,26 @@ const App = () => {
           <Home/>
           </Route>
           <Route exact path="/loginuser" >
-          <Loginuser showalert={showalert}/>
+         
+          <Loginuser showalert={showalert} alert={alert}/>
           </Route>
           <Route exact path="/loginadmin" >
-          <Loginadmin showalert={showalert} />
+            
+          <Loginadmin showalert={showalert}  alert={alert} />
           </Route>
           <Route exact path="/createuser">
-          <Createuser showalert={showalert}/>
+            
+          <Createuser showalert={showalert}  alert={alert}/>
           </Route>
           <Route exact path="/createadmin">
-          <Createadmin showalert={showalert}/>
+           
+          <Createadmin showalert={showalert}  alert={alert}/>
           </Route>
           <Route exact path="/user">
-            <NavbarStudent/>
-            <Alert alert={alert}/>
-          <User/>
+          <User  alert={alert}/>
           </Route>
           <Route exact path="/admin">
-            <Navbar/>
-            <Alert  alert={alert}/>
-          <Admin/>
+          <Admin alert={alert}/>
           </Route>
           <Route exact path="/admin/createquiz">
            <Createquiz1/>
@@ -70,7 +67,7 @@ const App = () => {
            <ViewResult/>
           </Route>
           <Route exact path="/admin/createquiz2">
-           <Createquiz/>
+           <Createquiz showalert={showalert}/>
           </Route>
           <Route exact path="/user/startquiz">
            <Startquiz/>

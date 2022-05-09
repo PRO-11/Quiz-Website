@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import '../../Css/createquiz1.css'
 import QuizContext from '../../Context/QuizContext';
-function Createquiz() {
+function Createquiz(props) {
   const context = useContext(QuizContext);
   let { ans } = context;
   const location = useLocation()
@@ -43,32 +43,13 @@ function Createquiz() {
     })
     let json = await response.json();
     ans = [];
-
+     props.showalert("Success","Created Quiz Successfully")
     history.push('/admin');
   }
   const handlechg = (e) => {
     setquiz({ ...newquiz, [e.target.name]: e.target.value })
   }
   return (
-    //     <div>
-    //         <form onSubmit={handlesubmit} >
-    //   <div className="mb-3">
-    //    <textarea rows="7" cols="100" placeholder='Enter Your Ques' onChange={handlechg} name="Ques" id="Ques"></textarea>
-    //   </div>
-    //   <div className='d-flex flex-column bd-highlight mb-3'>
-    //       Option1:<input type='text' name="Option1" id="Option1" onChange={handlechg} required/>
-    //       Option2:<input type='text' name="Option2" id="Option2" onChange={handlechg} required/>
-    //       Option3:<input type='text' name="Option3" id="Option3" onChange={handlechg} required/>
-    //       Option4:<input type='text' name="Option4" id="Option4" onChange={handlechg} required/>
-    //       Correct:<input type='text' name="Correct" id="Correct" onChange={handlechg} required/>
-    //       Marks:<input type='text' name="Marks" id="Marks" onChange={handlechg} required/>
-    //   </div>
-    //   <button type="submit" className="btn btn-primary">Submit</button>
-    // </form>
-    // <div className='d-flex flex-row-reverse'>
-    // <button className='btn btn-primary my-3 ' onClick={handlecreate}>Create Quiz</button>
-    // </div>
-    //     </div>
     <section  id="admincreate">
       <div className="d-flex justify-content-center row">
         <div className="col-md-10 col-lg-10">

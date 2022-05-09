@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom"
 import QuizContext from '../../Context/QuizContext';
 import userimg from '../../Images/user.png'
 import lockimg from '../../Images/lock .png'
+import Alert from '../../Alert'
 function Loginadmin(props) {
     const context=useContext(QuizContext);
     let history=useHistory()
@@ -25,14 +26,15 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
        history.push("/admin")
    }
    else{
-       alert('Wrong Credentials')
-   }
+    props.showalert("Failed","Incorrect Credentials")
+}
     }
      const onchange=(e)=>{
          setcred({...credentials,[e.target.name]:e.target.value})
      }
     return (
         <section   id="login">
+             <Alert  alert={props.alert} page="login"/>
         <div className="box">
           <div className="form">
             <h2>LOGIN ADMIN</h2>

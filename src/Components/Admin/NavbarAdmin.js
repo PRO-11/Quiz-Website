@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link ,useLocation,useHistory} from "react-router-dom";
 import '../../Css/Navbar.scss'
-function Navbar() {
+function Navbar({name}) {
   let history=useHistory();
   const logout=()=>{
     localStorage.removeItem('token');
@@ -11,7 +11,7 @@ function Navbar() {
     <div className="site">
 	
     <nav className="nav">
-      <div className="nav__title">Pro Quiz</div>
+      <div className="nav__title">{name}</div>
       <ul className="nav__list">
         <li className="nav__item"><Link to="/">Home</Link></li>
         <li className="nav__item"><Link to="/admin/createquiz">Create Quiz</Link></li>

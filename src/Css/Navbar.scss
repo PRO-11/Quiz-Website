@@ -1,4 +1,4 @@
-
+// IMPORTANT
 .nav {
 	position: sticky;
 	display: flex;
@@ -6,10 +6,20 @@
 	align-items: center;
 	height: 60px;
 	top: 0;
+	color: white;
+	right: 0;
+	border-radius: 4px;
 }
 
+.subnav {
+	position: sticky;
+	bottom: 0;
+	top: 60px; // prevent covering main nav
+}
+
+// DEMO LAYOUT CODE
 .nav {
-	background: #68e15b;
+	background: black;
 	&__title {
 		margin: 0px 30px;
 	}
@@ -17,4 +27,13 @@
 		display: inline-block;
 		margin: 0px 30px;
 	}
+}
+
+.nav__item a{
+	color: white;
+ text-decoration: none;
+}
+
+.nav__item a:hover{
+	color: red;
 }

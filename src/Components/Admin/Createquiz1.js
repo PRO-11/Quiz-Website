@@ -17,9 +17,9 @@ export default function Createquiz1() {
     },[])
     const handlesub=(e)=>{
       e.preventDefault();
-      if(clsub.start>clsub.end)
+      if(!Number.isInteger(Number(clsub.end)))
       {
-        alert('End time should be greater')
+        alert('Time Limit Should Be In Integer')
         return
       }
       else{
@@ -93,8 +93,8 @@ export default function Createquiz1() {
                 <input  type="datetime-local" className="pad0" name="start"   required onChange={onchange} id="start" />
             </div>
                 <div className="inputBx">
-                <label htmlFor="End" >End</label>
-                <input  type="datetime-local" className="pad0" name="end"   required onChange={onchange} id="end"  />
+                <label htmlFor="End" >Time Limit In Minutes</label>
+                <input  type="text" className="pad0" name="end"   required onChange={onchange} id="end"  />
             </div>
             <div className="inputBx">
             <input type="submit" value="Next"/>

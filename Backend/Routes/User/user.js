@@ -6,6 +6,7 @@ const router=express.Router();
 router.get('/',fetchadmin,async (req,res)=>{
   try{
     let userid=req.user.id;
+  let userinfo=await User.findOne({_id:userid});
     let success=false;
     let user=await User.findOne({_id:userid}).select("class");
 //fetch all quiz of class
@@ -38,7 +39,7 @@ router.get('/',fetchadmin,async (req,res)=>{
     ans.push(quizes);
    })
    success=true;
-   res.json({success,ans}); 
+   res.json({userinfo,ans}); 
   }
   catch(e)
   {
@@ -68,22 +69,11 @@ router.post('/submitquiz',fetchadmin,async (req,res)=>
      let user=await User.updateOne({_id:req.user.id}, {$push:{quiz:{"quiz_id":quiz_id ,"marks":marks }} });
      res.json(JSON.stringify(marks));
 })
-router.get('/getuser',fetchadmin,async (req,res)=>{
-  let userid=req.user.id;
-  let user=await User.findOne({_id:userid});
-  res.json(user);
-})
 router.post('/startTimer',(req,res)=>{
-  let start= req.body.start
-  let end=req.body.end
-  let s=end.substring(0,10);
-  let b=end.substring(11,19)
-  let ans=s+" "+b;
-  start=Date.parse(start);
-  end=Date.parse(ans);
-  let diff=(end-start);
+  let end=Number(req.body.end)
+  console.log(end)
   setTimeout(() => {
       res.json("stop");
-  }, diff);
+  }, end);
 })
 module.exports=router

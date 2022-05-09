@@ -3,16 +3,39 @@ import { useLocation, useHistory, Link } from 'react-router-dom'
 import QuizContext from '../../Context/QuizContext';
 import Clock from './Clock'
 import Startquizques from './Startquizques'
+function gettime(start,end)
+{
+  let endhr=Math.floor((end/60));
+  let endmin=end-endhr*60;
+  let hrst= Number(start.substring(11, 13));
+  let minst=Number(start.substring(14, 16));
+  let secst = start.substring(17, 19);
+  endmin=(endmin+minst);
+  let flag=0;
+  if(endmin>59)
+  {
+    flag=1;
+    endmin-=60;
+  }
+   endhr=(((endhr+hrst+flag)!=24?(endhr+hrst):0)).toString();
+  if(Number(endhr)<10)
+   endhr="0"+endhr;
+  if(Number(endmin)<10)
+   endmin="0"+endmin;
+  return endhr+":"+endmin+":"+secst;
+}
 function Startquiz() {
   const context = useContext(QuizContext);
   const location = useLocation()
   const { quiz_id, quiz, start, end } = location.state
   const { ans } = context
-  let time = new Date().toString();
-  let s = end.substring(0, 10);
-  let b = end.substring(11, 19)
-  let anss = s + " " + b;
+  let startdate=start.substring(0,10)
+  let starttime=gettime(start,end)
+  let anss = startdate + " " + starttime;
+  let now=Date.now()
   let endd = new Date(anss)
+  let endd2= Date.parse(endd)
+  endd2=endd2-now;
   const history = useHistory();
 
 
@@ -28,7 +51,7 @@ function Startquiz() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ "start": time, "end": end })
+          body: JSON.stringify({"end": endd2 })
         })
         const json = await response.json();
         if (json == "stop") {

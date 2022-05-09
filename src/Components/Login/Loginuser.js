@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {useHistory} from "react-router-dom"
 import userimg from '../../Images/user.png'
 import lockimg from '../../Images/lock .png'
+import Alert from '../../Alert'
 import '../../Css/Login.css'
 function Loginuser(props) {
     let history=useHistory()
@@ -25,8 +26,8 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
        history.push("/user")
    }
    else{
-       alert('Wrong Credentials')
-   }
+    props.showalert("Failed","Incorrect Credentials")
+}
     }
     
      const onchange=(e)=>{
@@ -36,6 +37,7 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
      
     return (
       <section   id="login">
+           <Alert  alert={props.alert} page="login"/>
         <div className="box">
           <div className="form">
             <h2>LOGIN USER</h2>

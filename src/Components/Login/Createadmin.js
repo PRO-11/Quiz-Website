@@ -2,6 +2,7 @@ import React ,{useState} from 'react'
 import { useHistory ,Link} from "react-router-dom"
 import userimg from '../../Images/user.png'
 import lockimg from '../../Images/lock .png'
+import Alert from '../../Alert'
 function Createadmin(props) {
   let history = useHistory();
   const [credentials, setcred] = useState({ user_id: "", password: " ", name: ""})
@@ -21,7 +22,8 @@ function Createadmin(props) {
           history.push("/admin")
       }
       else{
-          alert(json.msg)
+         
+            props.showalert("Failed","Incorrect Credentials")
       }
   }
   const onchange = (e) => {
@@ -29,6 +31,7 @@ function Createadmin(props) {
   }
   return (
     <section   id="login">
+       <Alert  alert={props.alert}/>
     <div className="box">
       <div className="form">
         <h2>REGISTER</h2>
