@@ -13,25 +13,10 @@ function Home() {
     <div className="bghome bg2"></div>
     <div className="bghome bg3"></div>
     <div className="content">
-      
-      
     <button className="mx-5" onClick={() => handleclick('admin')}>ADMIN</button>
-  <button className="mx-5" onClick={() => handleclick('user')}>STUDENT</button>
-  <div className="left">
-  </div>
-  
-  <div className="right">
-  </div>
-
-      {/* <section id="homepage">
-        <div className="left"></div>
-        ADMIN
-        <div className="right"></div>
-        <div className="left"></div>
-        STUDENT
-        <div className="right"></div>
-        </button>
-      </section> */}
+    <button className="mx-5" onClick={() => handleclick('user')}>STUDENT</button>
+    <div className="left"> </div>
+    <div className="right"></div>
     </div>
     </section>
   )

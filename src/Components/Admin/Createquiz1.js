@@ -1,8 +1,9 @@
 import React,{useContext, useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import Alert from '../../Alert'
 import { useHistory } from 'react-router-dom'
 import '../../Css/createquiz.css'
-export default function Createquiz1() {
+export default function Createquiz1(props) {
   
     const [clsub,setclsub]=useState({"class":"1","subject":"Maths"})
     let history=useHistory()
@@ -17,9 +18,15 @@ export default function Createquiz1() {
     },[])
     const handlesub=(e)=>{
       e.preventDefault();
+      let date=new Date().getTime();
+      let temp=new Date(clsub.start).getTime()
+      if(temp<date){
+        props.showalert("Failed","Date and time should be greater than now")
+      return ;
+      }
       if(!Number.isInteger(Number(clsub.end)))
       {
-        alert('Time Limit Should Be In Integer')
+        props.showalert("Failed","Time should be in Integer")
         return
       }
       else{
@@ -31,34 +38,8 @@ export default function Createquiz1() {
   }
     }
   return (
-//      <form onSubmit={handlesub} class>
-//        <label htmlFor="class" required>Select class:</label>
-//       <select name="class" id="class" onChange={handlechg} required>
-//   <option value="1">1</option>
-//   <option value="2">2</option>
-//   <option value="3">3</option>
-//   <option value="4">4</option>
-//   <option value="5">5</option>
-//   <option value="6">6</option>
-//   <option value="7">7</option>
-//   <option value="8">8</option>
-// </select>
-//        <label htmlFor="subject">Select Subject:</label>
-//       <select name="subject" id="subject" onChange={handlechg} required>
-//   <option value="Maths">Maths</option>
-//   <option value="Science">Science</option>
-//   <option value="English">English</option>
-//   <option value="Social Science">Social Science</option>
-// </select>
-// Quizname:<input type="text" name="quizname" onChange={handlechg} required></input>
-// Start:<input type="datetime-local" name='start' onChange={handlechg} required></input>
-// End:<input type="datetime-local" name="end"  onChange={handlechg} required ></input>
-// <button type='submit'>Next</button>
-// {/* <Link  to={{
-//     pathname: "/admin/createquiz2",
-//     state: { clsub }}}>Next</Link> */}
-// </form>
    <section   id="createquiz">
+      <Alert  alert={props.alert} page="loginusr"/>
         <div className="box">
           <div className="form">
             <h2>QUIZ DETAILS</h2>

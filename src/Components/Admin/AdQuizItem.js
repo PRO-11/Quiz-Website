@@ -67,7 +67,6 @@ function AdQuizItem(props) {
     pathname: "/admin/viewresults",
     state: { _id,classs }
   }}>View Results</Link>}
-  <Link className="col-md-8 my-2" id="viewbt" to="#">View Quiz</Link>
 </div>
     </div>
      

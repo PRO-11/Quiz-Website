@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import '../../Css/createquiz1.css'
 import QuizContext from '../../Context/QuizContext';
+import Alert from '../../Alert';
 function Createquiz(props) {
   const context = useContext(QuizContext);
   let { ans } = context;
@@ -24,6 +25,11 @@ function Createquiz(props) {
     }
   },[])
   const handlecreate = async () => {
+    if(ans.length===0)
+    {
+      props.showalert("Error","Write atleast one Ques")
+    return
+    }
     let obj = {
       class: clsub.class,
       sub_name: clsub.subject,
@@ -51,7 +57,8 @@ function Createquiz(props) {
   }
   return (
     <section  id="admincreate">
-      <div className="d-flex justify-content-center row">
+      <Alert alert={props.alert} page="loginusr"/>
+      <div className="d-flex justify-content-center row my-5">
         <div className="col-md-10 col-lg-10">
           <div className="border">
             <div className="question  p-3 border-bottom" style={{"background":"burlywood"}}>

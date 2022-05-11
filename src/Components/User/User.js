@@ -93,10 +93,11 @@ return()=>{
 }
       },[]);
   return (
-  <section id="userhmpg">
+    <>
   <NavbarStudent name={user.name}/>
   <Alert alert={props.alert} page="userhome"/>
-  <div  className='container ' style={{"marginTop":"50px"}}> 
+  <section id="userhmpg">
+  <div  className='container ' style={{"marginTop":"110px"}}> 
     <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
     <div className='container'>
             <div className='row'>
@@ -109,12 +110,13 @@ return()=>{
           </div>
     <h2 style={{"color":"white"}}>Past Quizes</h2>
     <div className='container'>
-            <div className='row'></div>
+            <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
      <QuizItem  quiz={quiz} user={user}/>
     </div>}
     })} 
+    </div>
     </div>
   </div>
   <div className="stars">
@@ -172,6 +174,7 @@ return()=>{
 
  
     </section>
+    </>
   )
 }
 

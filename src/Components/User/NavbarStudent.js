@@ -12,7 +12,7 @@ function NavbarStudent({name}) {
     history.push('/')
   }
   return (
-    
+  
     <nav className="nav">
       <div className="nav__title">Welcome {name}</div>
       <ul className="nav__list">
@@ -20,7 +20,7 @@ function NavbarStudent({name}) {
         <li className="nav__item"><Link to="/" onClick={logout}>Sign Out</Link></li>
       </ul>
     </nav>
-   
+  
 
 	
   )

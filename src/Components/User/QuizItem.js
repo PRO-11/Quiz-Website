@@ -24,7 +24,7 @@ function gettime(start,end)
 }
 
 function QuizItem(props) {
-    const { quiz_id, admin, quiz, start,end,subname, quizname, classs } = props.quiz;
+    const { quiz_id, admin, quiz, start,end,subname, quizname, classs ,totalmarks} = props.quiz;
     const user=props.user
   const [enablebt,setenable]=useState(0);
   const [marks,setmarks]=useState(-1);
@@ -48,7 +48,8 @@ function QuizItem(props) {
   
      }
      if( Object.keys(user).length !== 0){
-      user.quiz.forEach((ele)=>{
+       user.quiz.forEach((ele)=>{
+       
         if(ele.quiz_id==quiz_id){
           setmarks(ele.marks)
         setenable(-1)
@@ -78,13 +79,16 @@ function QuizItem(props) {
           <div className="col-6 col-md-6 my-2">Start Date: {startda}</div>
           <div className="col-6 col-md-6 my-2">Time Limit: {end} Minutes</div>
            </div>
+           <div className="row">
+           <div className="col-6 col-md-6 my-2">Start Time :{starttime}</div>
+           <div className="col-6 col-md-6 my-2">Total Marks :{totalmarks}</div>
+           </div>
             <div className="row">
-           <div className="col-6 col-md-8 my-2">Start Time :{starttime}</div>
-           {(enablebt==1)?<Link className="col-md-4 my-5 "  to={{
+              {(marks>=0)&&<div className=' col-md-8 my-2'>Marks Obtained:{marks}</div>}
+           {(enablebt==1)?<Link className="col-md-4 my-2 "  to={{
             pathname: "/user/startquiz",
             state: { quiz_id, quiz, start, end }
           }}>Start Quiz</Link>:<Link className=" col-md-4 my-2 disabledCursor" to="#" onClick={(event) => event.preventDefault()} style={{ cursor: "default",color:"gray" }}>Start Quiz</Link>}
-          {marks>=0&&<div className=' col-md-8 my-2'>Marks Obtained:{marks}</div>}
            </div>
       </div>
 

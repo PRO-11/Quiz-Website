@@ -37,7 +37,7 @@ const [credentials,setcred]=useState({user_id:"",password:" "})
      
     return (
       <section   id="login">
-           <Alert  alert={props.alert} page="login"/>
+           <Alert  alert={props.alert} page="loginusr"/>
         <div className="box">
           <div className="form">
             <h2>LOGIN USER</h2>

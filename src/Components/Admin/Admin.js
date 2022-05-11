@@ -76,7 +76,7 @@ function Admin(props) {
       <Alert alert={props.alert} page="userhome" />
       <div class="bg"></div>
     
-      <div className='container ' style={{ "marginTop": "100px" }}>
+      <div className='container ' style={{ "marginTop": "60px" }}>
           <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
           <div className='container'>
             <div className='row'>

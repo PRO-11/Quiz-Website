@@ -61,16 +61,16 @@ const App = () => {
           <Admin alert={alert}/>
           </Route>
           <Route exact path="/admin/createquiz">
-           <Createquiz1/>
+           <Createquiz1  showalert={showalert} alert={alert}/>
           </Route>
           <Route exact path="/admin/viewresults">
-           <ViewResult/>
+           <ViewResult />
           </Route>
           <Route exact path="/admin/createquiz2">
-           <Createquiz showalert={showalert}/>
+           <Createquiz showalert={showalert} alert={alert}/>
           </Route>
           <Route exact path="/user/startquiz">
-           <Startquiz/>
+           <Startquiz showalert={showalert} />
           </Route>
         </Switch> 
         </div>

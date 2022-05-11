@@ -24,7 +24,7 @@ function gettime(start,end)
    endmin="0"+endmin;
   return endhr+":"+endmin+":"+secst;
 }
-function Startquiz() {
+function Startquiz(props) {
   const context = useContext(QuizContext);
   const location = useLocation()
   const { quiz_id, quiz, start, end } = location.state
@@ -55,11 +55,13 @@ function Startquiz() {
         })
         const json = await response.json();
         if (json == "stop") {
-          history.push('/')
+          props.showalert("Success","Quiz submitted Successfully");
+          history.push('/user')
         }
       }
     }
     else {
+
       history.push('/loginuser')
     }
 
@@ -73,6 +75,7 @@ function Startquiz() {
       },
       body: JSON.stringify({ "id": quiz_id, "quiz": ans })
     })
+    props.showalert("Success","Quiz submitted Successfully");
     history.push('/user')
 
   }

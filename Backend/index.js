@@ -25,8 +25,7 @@ const setquizmarks = async(id, classs) => {
    user.forEach((element) => {
       let flag = 0;
       element.quiz.forEach((element1) => {
-         
-         if (JSON.stringify(element1.quiz_id )=== id) {
+         if ((element1.quiz_id )=== id) {
             flag = 1;
          }
       })
@@ -37,6 +36,7 @@ const setquizmarks = async(id, classs) => {
 };
 function gettime(start,end)
 {
+   try{
  let endhr=Math.floor((end/60));
 let endmin=end-endhr*60;
 let hrst= Number(start.substring(0, 2));
@@ -56,8 +56,14 @@ endhr="0"+endhr;
 if(Number(endmin)<10)
 endmin="0"+endmin;
 return endhr+":"+endmin+":"+secst;
+   }
+   catch(e)
+   {
+      console.log(e);
+   }
 }
 const calculate = (date) => {
+   try{
    let str = "";
    for (let i = 0; i < date.length; i++) {
       if (date[i] == ',')
@@ -75,7 +81,13 @@ const calculate = (date) => {
    ans += str[1];
    return ans;
 }
+   catch(e)
+   {
+   console.log(e);;
+   }
+}
 const checkquiz = async () => {
+   try{
    let allquiz = await quiz.find();
    allquiz.forEach((element) => {
       let start = element.start;
@@ -100,13 +112,15 @@ const checkquiz = async () => {
          sec = '0' + sec;
       }
       let time2 = hour + ":" + min + ":" + sec;
-      if (start1 === date1 && time1 === time2) {
-         console.log("abccajcsn")
+      if (start1 == date1&&time1 == time2) {
          id=JSON.stringify(element._id)
          setquizmarks(id, element.class);
-      }
-
+         }
    })
+  }
+  catch(e){
+     console.log(e);
+  }
 }
 
 setInterval(() => {
