@@ -55,7 +55,6 @@ function check1(start, end) {
      starttime=starttime.end
      let anss = startdate + " " + starttime;
      let startt = new Date(anss)
-     console.log(startt)
     let date = new Date();
     if (startt < date)
       return 1;
