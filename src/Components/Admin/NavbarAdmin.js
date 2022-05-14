@@ -4,7 +4,7 @@ import '../../Css/Navbar.scss'
 function Navbar({name}) {
   let history=useHistory();
   const logout=()=>{
-    localStorage.removeItem('token');
+    localStorage.removeItem('adtoken');
     history.push('/')
   }
   return (

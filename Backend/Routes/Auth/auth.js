@@ -53,22 +53,21 @@ body('user_id','Enter valid username').isLength({min:7}),
 body('password','Enter correct credentials').isLength({ min: 5 }),
 async (req, res) => {
     const errors = validationResult(req);
-    
     //  try{
-  if (!errors.isEmpty()) 
-    return res.status(400).json({ errors: errors.array() });
-    let user=await Admin.findOne({user_id:req.body.user_id});
-  if(!user)
-  return res.status(400).json({error:"Please try to login with correct credentials "});
-  const passcmp=await bcrypt.compare(req.body.password,user.password);
-  if(!passcmp){
-  return res.status(400).json({error:"Please try to login with correct credentials "});
-  }
-  const data={
-    user:{
-      id:user.id
-    }
-  }
+      if (!errors.isEmpty()) 
+      return res.status(400).json({ errors: errors.array() });
+      let user=await Admin.findOne({user_id:req.body.user_id});
+      if(!user)
+      return res.status(400).json({error:"User Not Exist "});
+      const passcmp=await bcrypt.compare(req.body.password,user.password);
+      if(!passcmp){
+        return res.status(400).json({error:"Please try to login with correct credentials "});
+      }
+      const data={
+        user:{
+          id:user.id
+        }
+      }
   const authtoken=jwt.sign(data,jwt_SECRET)
   let success=JSON.stringify("SUUCESS");
   res.json({success,authtoken}) 
@@ -143,7 +142,7 @@ async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
     let user=await User.findOne({user_id:req.body.user_id});
   if(!user){
-  return res.status(400).json({success,error:"Please try to login with correct credentials "});
+  return res.status(400).json({success,error:"User Not Exist"});
   }
   const passcmp=await bcrypt.compare(req.body.password,user.password);
   if(!passcmp){

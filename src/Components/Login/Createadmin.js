@@ -17,7 +17,7 @@ function Createadmin(props) {
       })
       const json = await response.json();
       if (json.success) {    
-    localStorage.setItem('token', json.authtoken);
+    localStorage.setItem('adtoken', json.authtoken);
     props.showalert("Success"," Resgistered Successful")
           history.push("/admin")
       }

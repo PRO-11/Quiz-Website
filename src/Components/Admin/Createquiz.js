@@ -19,7 +19,7 @@ function Createquiz(props) {
     console.log(ans)
   }
   useEffect(()=>{
-    if(!localStorage.getItem('token'))
+    if(!localStorage.getItem('adtoken'))
     {
       history.push('../loginadmin')
     }
@@ -30,6 +30,8 @@ function Createquiz(props) {
       props.showalert("Error","Write atleast one Ques")
     return
     }
+    if(!clsub.start.includes(":00.000Z"))
+    clsub.start= clsub.start+":00.000Z"
     let obj = {
       class: clsub.class,
       sub_name: clsub.subject,
@@ -39,11 +41,12 @@ function Createquiz(props) {
       totalmarks: total,
       quiz: ans
     }
+    
     const response = await fetch("http://localhost:5000/admin/createquiz", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
+        'auth-token': localStorage.getItem('adtoken')
       },
       body: JSON.stringify(obj)
     })

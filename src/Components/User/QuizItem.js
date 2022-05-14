@@ -15,12 +15,32 @@ function gettime(start,end)
     flag=1;
     endmin-=60;
   }
-   endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
-  if(Number(endhr)<10)
-   endhr="0"+endhr;
-  if(Number(endmin)<10)
-   endmin="0"+endmin;
-  return endhr+":"+endmin+":"+secst;
+  let dtchg=0;
+  if(endhr+hrst+flag>23)
+  dtchg=1
+  endhr = ((endhr + hrst + flag)%24).toString();
+  if (Number(endhr) < 10)
+    endhr = "0" + endhr;
+  if (Number(endmin) < 10)
+    endmin = "0" + endmin;
+  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
+}
+function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+  if(date>30){
+  mon+=1;
+  date=1;
+  }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
 }
 
 function QuizItem(props) {
@@ -35,12 +55,18 @@ function QuizItem(props) {
         let startdaa = startda + " " + starttime;
        let startdate = new Date(startdaa)
        let endti=gettime(start,end)
+       let dtchg=endti.dtchg;
+       if(dtchg){
+         startda=changedate(startda)
+         console.log(startda)
+        }
+        endti=endti.end
        let enda = startda + " " + endti;
        let enddate= new Date(enda)
        let countDown1= startdate.getTime();
        let countDown2 = enddate.getTime();
        const now = new Date().getTime();
-       
+       console.log(startdate,enddate)
       if(countDown1<=now&&now<=countDown2)//set enable button
         setenable(1);
       else

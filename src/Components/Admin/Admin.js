@@ -17,29 +17,62 @@ function gettime(start, end) {
     flag = 1;
     endmin -= 60;
   }
-  endhr = (((endhr + hrst + flag) != 24 ? (endhr + hrst + flag) : 0)).toString();
+  let dtchg=0;
+  if(endhr+hrst+flag>23)
+  dtchg=1
+  endhr = ((endhr + hrst + flag)%24).toString();
   if (Number(endhr) < 10)
     endhr = "0" + endhr;
   if (Number(endmin) < 10)
     endmin = "0" + endmin;
-  return endhr + ":" + endmin + ":" + secst;
+  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
+}
+function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+ if(date>30){
+   mon+=1;
+   date=1;
+ }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
 }
 function check1(start, end) {
   if (start) {
     let startdate = start.substring(0, 10);
     let starttime = gettime(start, end)
-    let anss = startdate + " " + starttime;
-    let startt = new Date(anss)
+    let dtchg=starttime.dtchg;
+    if(dtchg){
+      startdate=changedate(startdate)
+     }
+     starttime=starttime.end
+     let anss = startdate + " " + starttime;
+     let startt = new Date(anss)
+     console.log(startt)
     let date = new Date();
     if (startt < date)
       return 1;
 
   }
 }
+
 function check(start, end) {
   if (start) {
     let startdate = start.substring(0, 10);
     let starttime = gettime(start, end)
+    let dtchg=starttime.dtchg;
+    if(dtchg){
+     startdate=changedate(startdate)
+    }
+
+    starttime=starttime.end
     let anss = startdate + " " + starttime;
     let startt = new Date(anss)
     let date = new Date();
@@ -55,11 +88,11 @@ function Admin(props) {
   const [adquiz, setadquiz] = useState([]);
   const [adname, setadname] = useState("null")
   useEffect(async () => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('adtoken')) {
       const response = await fetch("http://localhost:5000/admin", {
         method: 'GET',
         headers: {
-          'auth-token': localStorage.getItem('token')
+          'auth-token': localStorage.getItem('adtoken')
         }
       })
       const json = await response.json();
@@ -74,7 +107,7 @@ function Admin(props) {
 <>
       <NavbarAdmin name={adname} />
       <Alert alert={props.alert} page="userhome" />
-      <div class="bg"></div>
+      <div className="bg"></div>
     
       <div className='container ' style={{ "marginTop": "60px" }}>
           <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
@@ -104,10 +137,10 @@ function Admin(props) {
         </div>
 
 
-      <div class="star-field">
-        <div class="layer"></div>
-        <div class="layer"></div>
-        <div class="layer"></div>
+      <div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
         </div>
         
       </>

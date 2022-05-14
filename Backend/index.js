@@ -34,6 +34,23 @@ const setquizmarks = async(id, classs) => {
       }
    })
 };
+function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+ if(date>30){
+   mon+=1;
+   date=1;
+ }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
+}
 function gettime(start,end)
 {
    try{
@@ -50,12 +67,15 @@ if(endmin>59)
  flag=1;
  endmin-=60;
 }
-endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
-if(Number(endhr)<10)
-endhr="0"+endhr;
-if(Number(endmin)<10)
-endmin="0"+endmin;
-return endhr+":"+endmin+":"+secst;
+let dtchg=0;
+  if(endhr+hrst+flag>23)
+  dtchg=1
+  endhr = ((endhr + hrst + flag)%24).toString();
+  if (Number(endhr) < 10)
+    endhr = "0" + endhr;
+  if (Number(endmin) < 10)
+    endmin = "0" + endmin;
+  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
    }
    catch(e)
    {
@@ -98,6 +118,11 @@ const checkquiz = async () => {
      date1 = calculate(date1);
      
      let time1=gettime(start.toISOString().substring(11,19),end);
+     let dtchg=time1.dtchg;
+    if(dtchg){
+      start1=changedate(start1)
+     }
+     time1=time1.end
    //   console.log(time1);
      let hour = new Date().getHours()
      let min = new Date().getMinutes()
@@ -112,6 +137,7 @@ const checkquiz = async () => {
          sec = '0' + sec;
       }
       let time2 = hour + ":" + min + ":" + sec;
+      if(element.quizname=="Motion")
       if (start1 == date1&&time1 == time2) {
          id=JSON.stringify(element._id)
          setquizmarks(id, element.class);

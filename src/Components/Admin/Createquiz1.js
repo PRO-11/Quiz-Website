@@ -11,7 +11,7 @@ export default function Createquiz1(props) {
         setclsub({...clsub,[e.target.name]:e.target.value})
     }
     useEffect(()=>{
-      if(!localStorage.getItem('token'))
+      if(!localStorage.getItem('adtoken'))
       {
         history.push('../loginadmin')
       }

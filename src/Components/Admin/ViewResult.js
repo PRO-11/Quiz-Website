@@ -11,7 +11,7 @@ function ViewResult() {
     const {results,setresults}=context;
     useEffect(async()=>{
       
-        if(!localStorage.getItem('token'))
+        if(!localStorage.getItem('adtoken'))
         {
           history.push('../loginadmin')
         }
@@ -21,7 +21,7 @@ function ViewResult() {
         const response1 = await fetch("http://localhost:5000/admin/viewresults", {
             method: 'POST',
             headers: {
-                'auth-token':localStorage.getItem('token'),
+                'auth-token':localStorage.getItem('adtoken'),
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ "quizid": _id, "class": classs })
@@ -32,24 +32,6 @@ function ViewResult() {
     }
     },[])
   return (
-//     <table className="table">
-//   <thead>
-//     <tr>
-//     <th scope="col">S.NO</th>
-//       <th scope="col">Name</th>
-//       <th scope="col">UserId</th>
-//       <th scope="col">Class</th>
-//       <th scope="col">Marks</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//   {results.map((res,index)=>{
-//      return  <tr key={res.userid}>
-//      <Table res={res} index={index+1}/>
-//     </tr>
-//     })} 
-//   </tbody>
-// </table>
 <section id="result">
       <h1>Results</h1><br/>
       <article>

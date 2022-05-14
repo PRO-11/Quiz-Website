@@ -17,12 +17,32 @@ function gettime(start,end)
     flag=1;
     endmin-=60;
   }
-   endhr=(((endhr+hrst+flag)!=24?(endhr+hrst):0)).toString();
-  if(Number(endhr)<10)
-   endhr="0"+endhr;
-  if(Number(endmin)<10)
-   endmin="0"+endmin;
-  return endhr+":"+endmin+":"+secst;
+  let dtchg=0;
+  if(endhr+hrst+flag>23)
+  dtchg=1
+  endhr = ((endhr + hrst + flag)%24).toString();
+  if (Number(endhr) < 10)
+    endhr = "0" + endhr;
+  if (Number(endmin) < 10)
+    endmin = "0" + endmin;
+  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
+}
+function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+ if(date>30){
+   mon+=1;
+   date=1;
+ }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
 }
 function Startquiz(props) {
   const context = useContext(QuizContext);
@@ -31,13 +51,17 @@ function Startquiz(props) {
   const { ans } = context
   let startdate=start.substring(0,10)
   let starttime=gettime(start,end)
+  let dtchg=starttime.dtchg;
+  if(dtchg){
+    startdate=changedate(startdate)
+   }
+   starttime=starttime.end;
   let anss = startdate + " " + starttime;
   let now=Date.now()
   let endd = new Date(anss)
   let endd2= Date.parse(endd)
   endd2=endd2-now;
   const history = useHistory();
-
 
   useEffect(async () => {
     if (localStorage.getItem('token')) {

@@ -26,7 +26,6 @@ const quiz1 = new mongoose.Schema({
       end:{
         type:String,
         required:true,
-        default:Date.now
       },
       sub_name:{
           type:String,

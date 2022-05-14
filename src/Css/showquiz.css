@@ -7,9 +7,17 @@
 #userquiz label.radio {
    cursor: pointer;
 }
+
+#userquiz h5{
+   margin-left: auto;
+}
 #userquiz  p {
-font-size: 1.3rem;
-border: 2px solid black;
+   
+   font-size: 1.3rem;
+   
+   width: 85%;
+   word-break: break-all;
+
 }
 #userquiz  label.radio input {
   

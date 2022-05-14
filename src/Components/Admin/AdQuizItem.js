@@ -4,11 +4,28 @@ import { Link } from 'react-router-dom';
 import '../../Css/enablebt.css'
 function AdQuizItem(props) {
     let classs=props.quiz.class
-    const {admin,sub_name,start,end,quizname,_id}=props.quiz;
+    const {admin,sub_name,start,end,quizname,_id,totalmarks}=props.quiz;
     let startda = start.substring(0, 10);
     let starttime = start.substring(11, 19)
     const [enablebt,setenable]=useState(0);
     const [enableview,setenableview]=useState(0);
+    function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+ if(date>30){
+   mon+=1;
+   date=1;
+ }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
+}
     function gettime(start,end)
     {
       let endhr=Math.floor((end/60));
@@ -23,18 +40,26 @@ function AdQuizItem(props) {
         flag=1;
         endmin-=60;
       }
-       endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
-      if(Number(endhr)<10)
-       endhr="0"+endhr;
-      if(Number(endmin)<10)
-       endmin="0"+endmin;
-      return endhr+":"+endmin+":"+secst;
+      let dtchg=0;
+  if(endhr+hrst+flag>23)
+  dtchg=1
+  endhr = ((endhr + hrst + flag)%24).toString();
+  if (Number(endhr) < 10)
+    endhr = "0" + endhr;
+  if (Number(endmin) < 10)
+    endmin = "0" + endmin;
+  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
     }
     useEffect(async ()=>{
       if(start){
         let startdaa = startda + " " + starttime;
         let startdate = new Date(startdaa)
         let endti=gettime(start,end)
+        let dtchg=endti.dtchg;
+        if(dtchg){
+          startdate=changedate(startdate)
+         }
+         endti=endti.end
         let enda = startda + " " + endti;
         let enddate= new Date(enda)
         let countDown2 = enddate.getTime();
@@ -63,6 +88,7 @@ function AdQuizItem(props) {
 <div className="col-md-6 my-2">Start Time :{starttime}</div>
         </div>
 <div className="row">
+<div className="col-md-6 my-2">Total Marks: {totalmarks}</div>
   {(enableview==1)&&<Link className="col-md-4 my-2" id="resultbt" to={{
     pathname: "/admin/viewresults",
     state: { _id,classs }

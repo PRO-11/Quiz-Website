@@ -10,30 +10,54 @@ function User(props) {
    const [user,setuser]=useState({});
    function gettime(start,end)
    {
-    let endhr=Math.floor((end/60));
-  let endmin=end-endhr*60;
-  let hrst= Number(start.substring(11, 13));
-  let minst=Number(start.substring(14, 16));
-  let secst = start.substring(17, 19);
-  endmin=(endmin+minst);
-  let flag=0;
-  if(endmin>59)
-  {
-    flag=1;
-    endmin-=60;
-  }
-   endhr=(((endhr+hrst+flag)!=24?(endhr+hrst+flag):0)).toString();
-  if(Number(endhr)<10)
-   endhr="0"+endhr;
-  if(Number(endmin)<10)
-   endmin="0"+endmin;
-  return endhr+":"+endmin+":"+secst;
+    let endhr = Math.floor((end / 60));
+    let endmin = end - endhr * 60;
+    let hrst = Number(start.substring(11, 13));
+    let minst = Number(start.substring(14, 16));
+    let secst = start.substring(17, 19);
+    endmin = (endmin + minst);
+    let flag = 0;
+    if (endmin > 59) {
+      flag = 1;
+      endmin -= 60;
+    }
+    let dtchg=0;
+    if(endhr+hrst+flag>23)
+    dtchg=1
+    endhr = ((endhr + hrst + flag)%24).toString();
+    if (Number(endhr) < 10)
+      endhr = "0" + endhr;
+    if (Number(endmin) < 10)
+      endmin = "0" + endmin;
+    return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
    }
+   function changedate(startdate)
+{
+  let date=Number(startdate.substring(8,10));
+  let mon=Number(startdate.substring(5,7));
+  let year=Number(startdate.substring(0,4));
+  date+=1;
+ if(date>30){
+   mon+=1;
+   date=1;
+ }
+   if(date<10)
+   date="0"+date
+   if(mon<10)
+   mon="0"+mon
+   startdate=year+"-"+mon+"-"+date
+  return startdate
+}
    function check1(start,end,quiz,id)
    {
     if(start){
         let startdate = start.substring(0, 10);
         let starttime=gettime(start,end)
+        let dtchg=starttime.dtchg;
+    if(dtchg){
+      startdate=changedate(startdate)
+     }
+     starttime=starttime.end
   let anss = startdate + " " + starttime;
         let startt = new Date(anss)
         let date=new Date();
@@ -54,6 +78,11 @@ function User(props) {
     if(start){
       let startdate = start.substring(0, 10);
       let starttime=gettime(start,end)
+      let dtchg=starttime.dtchg;
+    if(dtchg){
+      startdate=changedate(startdate)
+     }
+     starttime=starttime.end
 let anss = startdate + " " + starttime;
       let startt = new Date(anss)
       let date=new Date();

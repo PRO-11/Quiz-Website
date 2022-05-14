@@ -17,11 +17,13 @@ router.get('/',fetchadmin,async (req,res)=>{
    allquiz.forEach((element)=>{
     let arr1=new Array();
     element.quiz.forEach((element1)=>{
-      let abc={ "Ques":element1.Ques,
+      let abc={ 
+        "Ques":element1.Ques,
        "Option1":element1.Option1,
        "Option2":element1.Option2,
        "Option3":element1.Option3,
-       "Option4":element1.Option4
+       "Option4":element1.Option4,
+       "marks":element1.Marks
           }
       arr1.push(abc);
      })
@@ -71,7 +73,6 @@ router.post('/submitquiz',fetchadmin,async (req,res)=>
 })
 router.post('/startTimer',(req,res)=>{
   let end=Number(req.body.end)
-  console.log(end)
   setTimeout(() => {
       res.json("stop");
   }, end);
