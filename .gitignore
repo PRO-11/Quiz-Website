@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /Backend/node_modules
-/quiz_pass.txt
+quiz_pass.txt
 /.pnp
 .pnp.js
 
