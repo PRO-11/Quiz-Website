@@ -1,50 +1,10 @@
 import React, { useEffect, useState,useContext } from 'react'
 import { Link } from "react-router-dom"
 import '../../Css/QuizCard.css'
-function gettime(start,end)
-{
-  let endhr=Math.floor((end/60));
-  let endmin=end-endhr*60;
-  let hrst= Number(start.substring(11, 13));
-  let minst=Number(start.substring(14, 16));
-  let secst = start.substring(17, 19);
-  endmin=(endmin+minst);
-  let flag=0;
-  if(endmin>59)
-  {
-    flag=1;
-    endmin-=60;
-  }
-  let dtchg=0;
-  if(endhr+hrst+flag>23)
-  dtchg=1
-  endhr = ((endhr + hrst + flag)%24).toString();
-  if (Number(endhr) < 10)
-    endhr = "0" + endhr;
-  if (Number(endmin) < 10)
-    endmin = "0" + endmin;
-  return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
-}
-function changedate(startdate)
-{
-  let date=Number(startdate.substring(8,10));
-  let mon=Number(startdate.substring(5,7));
-  let year=Number(startdate.substring(0,4));
-  date+=1;
-  if(date>30){
-  mon+=1;
-  date=1;
-  }
-   if(date<10)
-   date="0"+date
-   if(mon<10)
-   mon="0"+mon
-   startdate=year+"-"+mon+"-"+date
-  return startdate
-}
-
 function QuizItem(props) {
     const { quiz_id, admin, quiz, start,end,subname, quizname, classs ,totalmarks} = props.quiz;
+    const gettime=props.gettime;
+    const changedate=props.changedate;
     const user=props.user
   const [enablebt,setenable]=useState(0);
   const [marks,setmarks]=useState(-1);
@@ -52,13 +12,13 @@ function QuizItem(props) {
   let starttime = start.substring(11, 19)
   useEffect(async ()=>{
      if(start){
+     
         let startdaa = startda + " " + starttime;
        let startdate = new Date(startdaa)
        let endti=gettime(start,end)
        let dtchg=endti.dtchg;
        if(dtchg){
          startda=changedate(startda)
-         console.log(startda)
         }
         endti=endti.end
        let enda = startda + " " + endti;
@@ -66,7 +26,6 @@ function QuizItem(props) {
        let countDown1= startdate.getTime();
        let countDown2 = enddate.getTime();
        const now = new Date().getTime();
-       console.log(startdate,enddate)
       if(countDown1<=now&&now<=countDown2)//set enable button
         setenable(1);
       else
@@ -75,9 +34,9 @@ function QuizItem(props) {
      }
      if( Object.keys(user).length !== 0){
        user.quiz.forEach((ele)=>{
-       
         if(ele.quiz_id==quiz_id){
           setmarks(ele.marks)
+          console.log(ele.marks)
         setenable(-1)
         }
         
@@ -110,7 +69,7 @@ function QuizItem(props) {
            <div className="col-6 col-md-6 my-2">Total Marks :{totalmarks}</div>
            </div>
             <div className="row">
-              {(marks>=0)&&<div className=' col-md-8 my-2'>Marks Obtained:{marks}</div>}
+              {(marks!=-1)&&<div className=' col-md-8 my-2'>Marks Obtained:{marks}</div>}
            {(enablebt==1)?<Link className="col-md-4 my-2 "  to={{
             pathname: "/user/startquiz",
             state: { quiz_id, quiz, start, end }

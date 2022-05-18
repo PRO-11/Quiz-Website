@@ -31,13 +31,16 @@ function User(props) {
       endmin = "0" + endmin;
     return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
    }
+   const month=[31,28,31,30,31,30,31,31,30,31,30,31];
+
+   
    function changedate(startdate)
 {
   let date=Number(startdate.substring(8,10));
   let mon=Number(startdate.substring(5,7));
   let year=Number(startdate.substring(0,4));
   date+=1;
- if(date>30){
+ if(date>month[mon-1]){
    mon+=1;
    date=1;
  }
@@ -86,7 +89,6 @@ function User(props) {
 let anss = startdate + " " + starttime;
       let startt = new Date(anss)
       let date=new Date();
-      // console.log(quiz,id)
       let flag=1;
       quiz.forEach((element)=>{
         if(element.quiz_id===id){
@@ -132,7 +134,7 @@ return()=>{
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user}/>
+     <QuizItem  quiz={quiz} user={user} changedate={changedate} gettime={gettime}/>
     </div>}
     })} 
     </div>
@@ -142,7 +144,7 @@ return()=>{
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user}/>
+     <QuizItem  quiz={quiz} user={user}  changedate={changedate} gettime={gettime}/>
     </div>}
     })} 
     </div>

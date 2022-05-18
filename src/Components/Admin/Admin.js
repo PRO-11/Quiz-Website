@@ -27,13 +27,14 @@ function gettime(start, end) {
     endmin = "0" + endmin;
   return {"end":endhr + ":" + endmin + ":" + secst,dtchg};
 }
+const month=[31,28,31,30,31,30,31,31,30,31,30,31];
 function changedate(startdate)
 {
   let date=Number(startdate.substring(8,10));
   let mon=Number(startdate.substring(5,7));
   let year=Number(startdate.substring(0,4));
   date+=1;
- if(date>30){
+ if(date>month[mon-1]){
    mon+=1;
    date=1;
  }
@@ -115,7 +116,7 @@ function Admin(props) {
               {adquiz.map((quiz) => {
                 {
                   return check(quiz.start, quiz.end) && <div className="col md-4 my-2" key={quiz._id}>
-                    <AdQuizItem quiz={quiz} />
+                    <AdQuizItem quiz={quiz}  changedate={changedate} gettime={gettime} />
                   </div>
                 }
               })}
@@ -127,7 +128,7 @@ function Admin(props) {
               {adquiz.map((quiz) => {
                 {
                   return check1(quiz.start, quiz.end) && <div className="col md-4 my-2" key={quiz._id}>
-                    <AdQuizItem quiz={quiz} />
+                    <AdQuizItem quiz={quiz} changedate={changedate} gettime={gettime} />
                   </div>
                 }
               })}
