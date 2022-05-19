@@ -116,7 +116,7 @@ function Admin(props) {
               {adquiz.map((quiz) => {
                 {
                   return check(quiz.start, quiz.end) && <div className="col md-4 my-2" key={quiz._id}>
-                    <AdQuizItem quiz={quiz}  changedate={changedate} gettime={gettime} />
+                    <AdQuizItem quiz={quiz}  changedate={changedate} gettime={gettime}  name={adname}/>
                   </div>
                 }
               })}
@@ -128,7 +128,7 @@ function Admin(props) {
               {adquiz.map((quiz) => {
                 {
                   return check1(quiz.start, quiz.end) && <div className="col md-4 my-2" key={quiz._id}>
-                    <AdQuizItem quiz={quiz} changedate={changedate} gettime={gettime} />
+                    <AdQuizItem quiz={quiz} changedate={changedate} gettime={gettime}  name={adname}/>
                   </div>
                 }
               })}

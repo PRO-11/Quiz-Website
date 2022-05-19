@@ -69,4 +69,60 @@ catch(e)
     console.log(e)
   }
 })
+router.post('/viewquiz',fetchadmin,async(req,res)=>{
+  try{
+    const quiz_id=req.body.quiz_id;
+    const ans=await quiz.findOne({_id:quiz_id});
+    res.json(ans);
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+})
+router.post('/updatedate',fetchadmin,async(req,res)=>{
+  try{
+    const quiz_id=req.body.quiz_id;
+     const start=req.body.start;
+     const end=req.body.end;
+    const ans=await quiz.updateOne({_id:quiz_id}, {$set:{"start":start,"end":end}})
+    console.log(ans)
+    res.json("success");
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+})
+router.post('/updateques',fetchadmin,async(req,res)=>{
+  try{
+    const quiz_id=req.body.quiz_id;
+    const ques_id=req.body.ques_id
+    const up_quiz=req.body.quiz
+    const ques=up_quiz.Ques;
+    const Op1=up_quiz.Option1
+    const Op2=up_quiz.Option2
+    const Op3=up_quiz.Option3
+    const Op4=up_quiz.Option4
+    const corr=up_quiz.Correct
+    const marks=Number(up_quiz.Marks)
+    let oldmarks=0;
+    let oldquiz=await quiz.findOne({_id:quiz_id})
+    oldquiz.quiz.forEach((element)=>{
+      if((element._id)==ques_id)
+      oldmarks=Number(element.Marks);
+    })
+    let totalmarks=Number(oldquiz.totalmarks);
+    totalmarks=totalmarks-oldmarks+marks;
+    const updatettmarks=await quiz.updateOne({_id:quiz_id},{$set:{"totalmarks":Number(totalmarks)}});
+    const ans=await quiz.updateOne({"quiz._id":ques_id}, {$set:{"quiz.$.Ques":ques,"quiz.$.Option1":Op1,
+    "quiz.$.Option2":Op2,"quiz.$.Option3":Op3,"quiz.$.Option4":Op4,"quiz.$.Correct":corr,"quiz.$.Marks":marks}})
+    console.log(ans)
+    res.json("success");
+  }
+  catch(e)
+  {
+    console.log(e)
+  }
+})
 module.exports=router;

@@ -6,6 +6,7 @@ function AdQuizItem(props) {
     let classs=props.quiz.class
     const {admin,sub_name,start,end,quizname,_id,totalmarks}=props.quiz;
     const gettime=props.gettime;
+    const adname=props.name;
     const changedate=props.changedate
     let startda = start.substring(0, 10);
     let starttime = start.substring(11, 19)
@@ -47,11 +48,14 @@ function AdQuizItem(props) {
         </div>
 <div className="row">
 <div className="col-md-6 my-2">Total Marks: {totalmarks}</div>
-  {(enableview==1)&&<Link className="col-md-4 my-2" id="resultbt" to={{
+</div>
+<div className="row">
+<Link className="col-md-4 my-2" id="resultbt" to={{pathname:"/admin/viewquiz",state:{id:_id,name:adname}}} >View Quiz</Link>
+  {(enableview==1)&&<Link className="col-md-4 my-2 mx-5" id="resultbt" to={{
     pathname: "/admin/viewresults",
     state: { _id,classs }
   }}>View Results</Link>}
-</div>
+  </div>
     </div>
      
   </div> 

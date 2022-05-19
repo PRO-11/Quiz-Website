@@ -1,14 +1,12 @@
 import React, { useEffect,useState,useContext } from 'react'
 import Table from './Table';
 import '../../Css/Result.css'
-import QuizContext from '../../Context/QuizContext';
 import {useLocation,useHistory} from 'react-router-dom';
 function ViewResult() {
   const location = useLocation()
   let _id,classs 
   let history=useHistory()
-  const context=useContext(QuizContext);
-    const {results,setresults}=context;
+    const [results,setresults]=useState([]);
     useEffect(async()=>{
       
         if(!localStorage.getItem('adtoken'))

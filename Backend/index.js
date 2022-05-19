@@ -13,7 +13,8 @@ app.use(express.json())
 app.use('/auth', require('./Routes/Auth/auth'));
 app.use('/admin', require('./Routes/Admin/admin'));
 app.use('/user', require('./Routes/User/user'))
-app.listen(5000, () => {
+const PORT=process.env.PORT ||5000;
+app.listen(PORT, () => {
    console.log(`http://localhost:5000`);
 })
 const updatee=async(id,quizid)=>{
@@ -151,6 +152,7 @@ const checkquiz = async () => {
 
 setInterval(() => {
    checkquiz();
+
 }, 1000)
 
 

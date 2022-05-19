@@ -6,6 +6,7 @@
 }
 #userquiz label.radio {
    cursor: pointer;
+   word-break: break-all;
 }
 
 #userquiz h5{
@@ -22,6 +23,7 @@
 #userquiz  label.radio input {
   
 background: antiquewhite;
+
 }
 
 #userquiz  label.radio span {
@@ -50,4 +52,8 @@ background: antiquewhite;
 #userquiz  .btn:active {
    outline: 0 !important;
    box-shadow: none !important
+}
+#userquiz button{
+  background-color: aqua;
+  /* float: right; */
 }

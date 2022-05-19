@@ -11,6 +11,7 @@ import Startquiz from './Components/User/Startquiz'
 import ViewResult from './Components/Admin/ViewResult'
 import QuizContext from './Context/QuizContext';
 import QuizState from './Context/QuizState';
+import Viewquiz from './Components/Admin/Viewquiz'
 import Home from './Components/Home';
 import Alert from './Alert'
 import {
@@ -71,6 +72,9 @@ const App = () => {
           </Route>
           <Route exact path="/user/startquiz">
            <Startquiz showalert={showalert} />
+          </Route>
+          <Route exact path="/admin/viewquiz">
+          <Viewquiz showalert={showalert}  alert={alert}/>
           </Route>
         </Switch> 
         </div>

@@ -5,11 +5,11 @@ import React, { useState } from 'react'
 function QuizState(props) {
  
 
-   const [results,setresults]=useState([]);
+
   let ans=new Array;
    
   return (
-    <QuizContext.Provider value={{results,setresults,ans}}>
+    <QuizContext.Provider value={{ans}}>
         {props.children}
     </QuizContext.Provider>
   )
