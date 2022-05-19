@@ -1,13 +1,12 @@
+require('dotenv').config()
 const connectToMongo = require('./db')
 connectToMongo();
-
-
 const express = require("express")
 const User = require('./Models/User');
 const quiz = require('./Models/quiz');
 const app = express();
 var cors = require('cors');
-const { update } = require('./Models/User');
+
 app.use(cors())
 app.use(express.json())
 app.use('/auth', require('./Routes/Auth/auth'));
@@ -15,7 +14,7 @@ app.use('/admin', require('./Routes/Admin/admin'));
 app.use('/user', require('./Routes/User/user'))
 const PORT=process.env.PORT ||5000;
 app.listen(PORT, () => {
-   console.log(`http://localhost:5000`);
+   console.log(`http://localhost:${PORT}`);
 })
 const updatee=async(id,quizid)=>{
    await User.updateOne({ _id:id }, { $push: { quiz: { "quiz_id": quizid, "marks": 0 } } });

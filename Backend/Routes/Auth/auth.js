@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken')
 const fetchadmin=require('../../Middleware/fetchadmin')
 const router=express.Router();
 const { body, validationResult } = require('express-validator');
-const jwt_SECRET="QuizeSite#123"
+const jwt_SECRET=process.env.jwtsecret
 
 
 
