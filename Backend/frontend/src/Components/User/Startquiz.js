@@ -65,46 +65,31 @@ function Startquiz(props) {
   let endd2= Date.parse(endd)
   endd2=endd2-now;
   const history = useHistory();
-const startTimer=async()=>{
-  const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/user/startTimer", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({"end": endd2 })
-  })
-  const json = await response.json();
-  if (json == "stop") {
-    props.showalert("Success","Quiz submitted Successfully");
-    handlesub();
-    history.push('/user')
-  }
-}
   useEffect(async () => {
-    if (localStorage.getItem('token')) {
+
+    if (localStorage.getItem('token')) { 
       let isMounted = true;
       if (isMounted) {
         window.onpopstate = function (event) {
           history.go(1)
         };
-        document.addEventListener('visibilitychange', function(){
-          if(document.visibilityState==='hidden')
-          {
-            handlesub();
-          }
+      //   document.addEventListener('visibilitychange', function(){
+      //     if(document.visibilityState==='hidden')
+      //     {
+      //       handlesub();
+      //     }
          
-       });
-       startTimer();
+      //  });
+      
       }
-    }
+      }
     else {
-
       history.push('/loginuser')
     }
 
   }, []);
   const handlesub = async () => {
-    const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/user/submitquiz", {
+    const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/userbackend/submitquiz", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -112,20 +97,33 @@ const startTimer=async()=>{
       },
       body: JSON.stringify({ "id": quiz_id, "quiz": ans })
     })
+    const json = await response.json();
+    if(json.marks==="Delay")
+    props.showalert("Delayed","Quiz submitted Late");
+    else
     props.showalert("Success","Quiz submitted Successfully");
     history.push('/user')
-
   }
+  
   const handleclk = (e, index) => {
     ans[index] = e.target.value
   }
   return (
-    <section style={{"position":"absolute","top":"0","left":"0px", "width":"100%","minHeight": "100vh", background:"linear-gradient(#e66465, #9198e5)"}} >
+    // <section style={{"position":"absolute","top":"0","left":"0px", "width":"100%","minHeight": "100vh", "background":"linear-gradient(#e66465, #9198e5)"}} >
+    <div className="d-flex flex-column" id="admincreate" style={{"background":"linear-gradient(#e66465, #9198e5)"}}>
+      <div>
+      <div className="d-flex justify-content-start">
+        <div>
       <Clock end={endd} submit={handlesub} />
       <br/>
       <br/>
       <br/>
-
+      </div>
+      
+      <div><Link className="btn btn-primary" id="subbtn" to="/users" onClick={handlesub}>SubmitQuiz</Link>
+</div>
+      </div>
+    </div>
       {quiz.map((element, index) => {
         return <div className="container my-2" key={index}>
           <Startquizques quiz={element} index={index} handleclk={handleclk} />
@@ -133,12 +131,8 @@ const startTimer=async()=>{
       })
       }
 
-      <Link className="btn btn-primary" to="/users" onClick={handlesub} style={{
-        "position": "fixed",
-        "top": "0px",
-        "right": "25px"
-      }} >SubmitQuiz</Link>
-    </section>
+    {/* </section> */}
+    </div>
   )
 }
 

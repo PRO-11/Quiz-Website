@@ -1,0 +1,14 @@
+#loginusr{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-size: 1.3em;
+    left: 0;
+}
+#userhome{
+    position: absolute;
+    top: 70px;
+    font-size: 1.3em;
+    width: 100vw;
+   z-index: 1;
+}

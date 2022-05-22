@@ -1,0 +1,59 @@
+
+#userquiz{
+  margin-left:0;
+ 
+     
+}
+#userquiz label.radio {
+   cursor: pointer;
+   word-break: break-all;
+}
+
+#userquiz h5{
+   margin-left: auto;
+}
+#userquiz  p {
+   
+   font-size: 1.3rem;
+   
+   width: 85%;
+   word-break: break-all;
+
+}
+#userquiz  label.radio input {
+  
+background: antiquewhite;
+
+}
+
+#userquiz  label.radio span {
+   padding: 4px 0px;
+   border: 1px solid red;
+   display: inline-block;
+   color: red;
+   width: 100px;
+   text-align: center;
+   border-radius: 3px;
+   margin-top: 7px;
+   text-transform: uppercase
+}
+
+
+#userquiz  .ans {
+   margin-left: 26px !important;
+   font-size: large;
+}
+
+#userquiz  .btn:focus {
+   outline: 0 !important;
+   box-shadow: none !important
+}
+
+#userquiz  .btn:active {
+   outline: 0 !important;
+   box-shadow: none !important
+}
+#userquiz button{
+  background-color: aqua;
+ float: right;
+}

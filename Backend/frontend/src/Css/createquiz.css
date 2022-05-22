@@ -1,0 +1,148 @@
+
+#createquiz{
+   
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   font-size: 1.5em;
+    color: rgb(123, 255, 0);
+
+}
+#createquiz .box{
+    position: absolute;
+    padding: 50px;
+    top: 30px;
+    width: 360px;
+    height: 550px;
+    /* top:10pxx; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    box-shadow: 0px 5px 35px rgba(0,0,0,0.2);
+}
+#createquiz .box::after{
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+    background: linear-gradient(to bottom,rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.1) 15%,transparent  50%,transparent 85%,rgba(255,255,255,0.3) 100%);
+}
+
+#createquiz .box .form{
+ position: relative;
+ width: 100%;
+}
+#createquiz .box .form h2{
+    color: #ffff;
+    font-weight: 600;
+    letter-spacing: 2px;
+    
+   }
+
+   #createquiz .box .form .inputBx{
+    position: relative;
+    width:100%;
+    margin-bottom: 20px;
+   }
+
+   #createquiz .box .form .inputBx input{
+   width:100%;
+   outline: none;
+   border: 1px solid rgba(255,255,255,0.2);
+   background: transparent;
+   padding: 6px 10px;
+   padding-left:35px;
+   border-radius: 6px;
+   font-size: 16px;
+   font-weight: 300;
+   color: #ffff;
+   box-shadow: inset 0 0 25px rgba(0,0,0,0.2);
+   }
+   #createquiz .box .form .inputBx #name{
+    width:100%;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-left: 6px;
+    color: white;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.2);
+   }
+   #createquiz .box .form .inputBx .pad0{
+    width:100%;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-left: 6px;
+    color: white;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.2);
+   }
+   #createquiz .box .form .inputBx select{
+    width:40%;
+    margin-left: 10px;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    padding: 8px 10px;
+    padding-left:35px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.2);
+    }
+  #createquiz   .box .form .inputBx select option{
+        color: white;
+    background-color: rgb(182 220 108);
+    }
+  #createquiz  .box .form .inputBx input::placeholder{
+color: #ffff;   
+}
+#createquiz .box .form .inputBx input::placeholder{
+    color: #ffff;   
+    }
+
+    #createquiz .box .form .inputBx input[type="submit"]{
+ background: #ffff;
+ color: #111;
+ max-width: 100px;
+ padding: 8px 10px;
+ box-shadow:none;
+ font-weight: 500;
+ letter-spacing: 1px;
+ cursor: pointer;    
+}
+#createquiz .box .form .inputBx img{
+    position: absolute;
+
+    height: 27px;
+    top: 30px;
+    left: 5px;
+    transform: scale(0.7);
+    filter: invert(1);
+}   
+#createquiz .box .form p{
+    color: #ffff;
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: 5px;
+}
+#createquiz .box .form p Link{
+    color: #ffff;
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: 5px;
+}

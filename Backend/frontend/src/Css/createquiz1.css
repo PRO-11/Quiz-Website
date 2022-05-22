@@ -1,0 +1,59 @@
+
+#admincreate{
+     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      min-height: 100vh; 
+}
+#admincreate label.radio {
+    cursor: pointer
+}
+#admincreate  textarea {
+background: antiquewhite;
+}
+#admincreate  label.radio input {
+   
+background: antiquewhite;
+}
+
+#admincreate  label.radio span {
+    padding: 4px 0px;
+    border: 1px solid red;
+    display: inline-block;
+    color: red;
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 7px;
+    text-transform: uppercase
+}
+
+
+
+#admincreate  .btn:focus {
+    outline: 0 !important;
+    box-shadow: none !important
+}
+
+#admincreate  .btn:active {
+    outline: 0 !important;
+    box-shadow: none !important
+}
+
+@media only screen and (min-width: 800px) {
+  
+  #admincreate textarea {
+      min-width: 600px;
+      min-height:150px ;
+    }
+    #subbtn {
+        position:fixed;
+        right: 13px;
+     top: 5px
+       }
+  }
+ 
