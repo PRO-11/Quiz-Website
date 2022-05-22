@@ -19,7 +19,7 @@ function NavbarStudent({name}) {
         <Link to="#"><img src={userimg} height="30em" width="30em"/>{name}</Link>
       <Link to="/">Home</Link>
       <Link to="/" onClick={logout}>Sign Out</Link>
-      <div class="animation start-home"></div>
+      <div className="animation start-home"></div>
     </nav>
   
 

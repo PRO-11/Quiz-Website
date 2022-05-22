@@ -45,7 +45,7 @@ function QuizItem(props) {
   }, [])
 
   return (
-    <div >
+    <div className='container' >
       <div className="card" id="card">
         <div className="card-body " style={{ "fontSize": "1.3em" }}>
           <div className="container">
@@ -79,8 +79,8 @@ function QuizItem(props) {
               {(enablebt == 1) ? <Link to={{
                 pathname: "/user/startquiz",
                 state: { quiz_id, quiz, start, end }
-              }} style={{ "border": "2px solid black", "background": "red", "color": "cornsilk", "borderRadius": "3px", "textDecoration": "none", "text-align": "center" }}>Start Quiz</Link> :
-               <Link className="disabledCursor" to="#" onClick={(event) => event.preventDefault()} style={{ "border": "2px solid black", "background": "red", "color": "grey", "borderRadius": "3px", "textDecoration": "none", "text-align": "center" }}>Start Quiz</Link>}
+              }} style={{ "border": "2px solid black", "background": "red", "color": "cornsilk", "borderRadius": "3px", "textDecoration": "none", "textAlign": "center" }}>Start Quiz</Link> :
+               <Link className="disabledCursor" to="#" onClick={(event) => event.preventDefault()} style={{ "border": "2px solid black", "background": "red", "color": "grey", "borderRadius": "3px", "textDecoration": "none", "textAlign": "center" }}>Start Quiz</Link>}
             </div>
           </div>
         </div>

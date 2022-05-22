@@ -22,7 +22,6 @@ function Clock(props) {
         let seconds=Math.floor((distance%(1000*60)/(1000)));
         if(seconds<10)
         seconds="0"+seconds
-        console.log(finish)
         if(distance<0)
         {
           // handlesub();

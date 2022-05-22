@@ -41,7 +41,7 @@ export default function Createquiz1(props) {
     }
   return (
   <div className='d-flex flex-column'  style={{ "position": "absolute","top":"0","left":"0","width":"100%" ,"height":"100vh"}}>
-     <div className="bgadmin"></div>
+     <div className="bgadmin" ></div>
     <NavbarAdmin name={name}/>
       <Alert  alert={props.alert} page="loginusr"/>
       <div class="d-flex justify-content-center">

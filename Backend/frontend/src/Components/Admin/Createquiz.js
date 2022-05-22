@@ -60,10 +60,11 @@ function Createquiz(props) {
     setquiz({ ...newquiz, [e.target.name]: e.target.value })
   }
   return (
-    <div id="admincreate">
-      <div className="bgadmin"></div>
+    <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
       <Navbar name={name}/>
       <Alert alert={props.alert} page="loginusr"/>
+    <div id="admincreate" className='"d-flex justify-content-center"'>
+      <div className="bgadmin"></div>
       <div className="d-flex justify-content-center row my-1">
         <div className="container">
           <div className="border">
@@ -128,7 +129,7 @@ function Createquiz(props) {
         </div>
         
     </div>
-    
+    </div>
   )
 }
 

@@ -128,8 +128,9 @@ return()=>{
 }
       },[]);
   return (
-  <section id="userhmpg">
-<div className="d-flex flex-column" style={{"flexWrap":"wrap"}}>
+    <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
+ 
+    {/* <div className="d-flex flex-column" style={{"flexWrap":"wrap"}}> */}
   <NavbarStudent name={user.name}/>
   <Alert alert={props.alert} page="userhome"/>
   <div className='container ' style={{ "marginTop": "60px","marginLeft":"30px" }}>
@@ -153,7 +154,8 @@ return()=>{
     })} 
     </div>
     </div>
-  </div>
+  {/* </div> */}
+  <section id="userhmpg">
   <div className="stars">
   <div className="star"></div>
   <div className="star"></div>
@@ -206,10 +208,11 @@ return()=>{
   <div className="star"></div>
   <div className="star"></div>
 </div>
+    </section>
     </div>
 
  
-    </section>
+  </div>
   )
 }
 
