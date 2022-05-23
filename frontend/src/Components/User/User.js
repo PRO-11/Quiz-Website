@@ -3,11 +3,16 @@ import QuizItem from './QuizItem';
 import NavbarStudent from './NavbarStudent'
 import Alert from '../../Alert'
 import '../../Css/userhomepg.scss'
-import {useHistory} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 function User(props) {
   let history=useHistory()
+  let location=useLocation();
+  
+  
   const [userquiz,setuserquiz]=useState([]);
    const [user,setuser]=useState({});
+    const [past,setpast]=useState("null");
+    
    function gettime(start,end)
    {
     let endhr = Math.floor((end / 60));
@@ -66,7 +71,8 @@ function User(props) {
         let date=new Date();
         let flag=1;
         quiz.forEach((element)=>{
-          if(element.quiz_id===id){
+          if(element.quiz_id===id||element.quiz_id===past){
+   
              flag=0
            return 1;
            }
@@ -91,7 +97,8 @@ let anss = startdate + " " + starttime;
       let date=new Date();
       let flag=1;
       quiz.forEach((element)=>{
-        if(element.quiz_id===id){
+  
+        if(element.quiz_id===id||element.quiz_id==past){
            flag=0
          return 0;
          }
@@ -103,18 +110,27 @@ let anss = startdate + " " + starttime;
     }
       
    }
-useEffect(async () => {
- if(localStorage.getItem('token')){
-  const response1 = await fetch("https://vaishnavi-quiz-website.herokuapp.com/user", {
+   const getallquiz=async()=>{
+    const response1 = await fetch("https://pro-quizz.herokuapp.com/userbackend", {
       method: 'GET',
       headers: {
           'auth-token':localStorage.getItem('token')
       }  
   })
+  
   const json = await response1.json();
   setuser(json.userinfo);
    setuserquiz(json.ans); 
-}
+   }
+useEffect(async () => {
+ if(localStorage.getItem('token')){
+  if(location.state!=undefined){
+    setpast(location.state.detail)
+    getallquiz()
+    }
+     getallquiz()
+   document.title="Quizzing-Student"
+  }
 else{
 history.push('/loginuser')
 }
@@ -124,32 +140,34 @@ return()=>{
 }
       },[]);
   return (
-    <>
+    <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
+ 
+    {/* <div className="d-flex flex-column" style={{"flexWrap":"wrap"}}> */}
   <NavbarStudent name={user.name}/>
   <Alert alert={props.alert} page="userhome"/>
-  <section id="userhmpg">
-  <div  className='container ' style={{"marginTop":"110px"}}> 
-    <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
-    <div className='container'>
+  <div className='container ' style={{ "marginTop": "60px","marginLeft":"30px" }}>
+          <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
+          <div className='container'>
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user} changedate={changedate} gettime={gettime}/>
+     <QuizItem  quiz={quiz} user={user} changedate={changedate} gettime={gettime} disab={0}/>
     </div>}
     })} 
     </div>
           </div>
-    <h2 style={{"color":"white"}}>Past Quizes</h2>
+    <h2 style={{"color":"white"}} className="my-5">Past Quizes</h2>
     <div className='container'>
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user}  changedate={changedate} gettime={gettime}/>
+     <QuizItem  quiz={quiz} user={user}  changedate={changedate} gettime={gettime} disab={check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)}/>
     </div>}
     })} 
     </div>
     </div>
-  </div>
+  {/* </div> */}
+  <section id="userhmpg">
   <div className="stars">
   <div className="star"></div>
   <div className="star"></div>
@@ -202,10 +220,11 @@ return()=>{
   <div className="star"></div>
   <div className="star"></div>
 </div>
+    </section>
+    </div>
 
  
-    </section>
-    </>
+  </div>
   )
 }
 

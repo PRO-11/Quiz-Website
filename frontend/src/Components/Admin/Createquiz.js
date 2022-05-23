@@ -3,11 +3,12 @@ import { useHistory, useLocation } from 'react-router-dom'
 import '../../Css/createquiz1.css'
 import QuizContext from '../../Context/QuizContext';
 import Alert from '../../Alert';
+import Navbar from './NavbarAdmin';
 function Createquiz(props) {
   const context = useContext(QuizContext);
   let { ans } = context;
   const location = useLocation()
-  const { clsub } = location.state
+  const { clsub ,name} = location.state
   let history = useHistory()
   const [newquiz, setquiz] = useState({"Correct":"1","Marks":"1"})
   const [total, settm] = useState(0)
@@ -42,7 +43,7 @@ function Createquiz(props) {
       quiz: ans
     }
     
-    const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin/createquiz", {
+    const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/createquiz", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,21 +60,23 @@ function Createquiz(props) {
     setquiz({ ...newquiz, [e.target.name]: e.target.value })
   }
   return (
-    <section  id="admincreate">
-      <Alert alert={props.alert} page="loginusr"/>
-      <div className="d-flex justify-content-center row my-5">
-        <div className="col-md-10 col-lg-10">
+    <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
+      <Navbar name={name}/>
+      <Alert alert={props.alert} page="userhome"/>
+    <div id="admincreate" className='"d-flex justify-content-center"'>
+      <div className="bgadmin"></div>
+      <div className="d-flex justify-content-center row my-1">
+        <div className="container">
           <div className="border">
             <div className="question  p-3 border-bottom" style={{"background":"burlywood"}}>
               <div className="d-flex flex-row justify-content-between align-items-center mcq">
                 <h4>MCQ Quiz</h4>
               </div>
             </div>
-            <form onSubmit={handlesubmit} className="d-flex flex-column">
-            <div className="question  p-3 border-bottom" style={{"background":"burlywood"}}>
+             <form  onSubmit={handlesubmit} className="question  p-3 border-bottom" style={{"background":"burlywood"}}>
               <div className="d-flex flex-row align-items-center question-title">
                 <h3 className="text-danger">Q.</h3>
-                <textarea className="mt-1 ml-2" rows="3" cols="80" placeholder='Enter Your Ques' onChange={handlechg} name="Ques" id="Ques" required></textarea>
+                <textarea className="form-control"  rows="3"  placeholder='Enter Your Ques' onChange={handlechg} name="Ques" id="Ques" required></textarea>
               </div>
               <div className="ans ml-2 my-3">
                 <label className="radio"> Option 1: <input type='text' name="Option1" id="Option1" onChange={handlechg} required /></label>
@@ -111,17 +114,22 @@ function Createquiz(props) {
                   </select>
                 </label>
               </div>
-            </div>
             <div className='d-flex justify-content-end' style={{"background":"burlywood"}}>
             <button type="submit" className="w-25 bg-info" >Next</button>
             </div>
-            </form>
+            </form> 
           </div>
         </div>
       <button className='btn btn-warning my-3 w-50 ' onClick={handlecreate}>Create Quiz</button>
       </div>
-    </section>
-    
+      <div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
+        </div>
+        
+    </div>
+    </div>
   )
 }
 

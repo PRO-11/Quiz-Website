@@ -1,16 +1,13 @@
 
 #admincreate{
-     position: absolute;
+     /* position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 0; */
+    /* width: 100%; */
     display: flex;
     justify-content: center;
     align-items: center;
       min-height: 100vh; 
-      background: linear-gradient(-30deg,#03a9f4 0%,#3a78b7 50%,
-      #262626 50%,#607d8b 100%); 
-      
 }
 #admincreate label.radio {
     cursor: pointer
@@ -36,9 +33,6 @@ background: antiquewhite;
 }
 
 
-#admincreate  .ans {
-    margin-left: 36px !important
-}
 
 #admincreate  .btn:focus {
     outline: 0 !important;
@@ -49,3 +43,17 @@ background: antiquewhite;
     outline: 0 !important;
     box-shadow: none !important
 }
+
+@media only screen and (min-width: 800px) {
+  
+  #admincreate textarea {
+      min-width: 600px;
+      min-height:150px ;
+    }
+    #subbtn {
+        position:fixed;
+        right: 13px;
+     top: 5px
+       }
+  }
+ 

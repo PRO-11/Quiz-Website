@@ -37,16 +37,17 @@
 // 	color: red;
 // }
 
-nav {
+.navst {
 	margin: 27px auto 0;
+
 	position: relative;
-	width:470px;
+	width: 400px;
 	height: 50px;
 	background-color: #34495e;
 	border-radius: 8px;
 	font-size: 0;
 }
-nav a {
+.navst a {
 	line-height: 50px;
 	height: 100%;
 	font-size: 15px;
@@ -59,7 +60,7 @@ nav a {
 	color: white;
 	cursor: pointer;
 }
-nav .animation {
+.navst .animation {
 	position: absolute;
 	height: 100%;
 	top: 0;
@@ -67,37 +68,32 @@ nav .animation {
 	transition: all .5s ease 0s;
 	border-radius: 8px;
 }
-a:nth-child(1) {
+.navst a:nth-child(1) {
 	width: 120px;
 }
-a:nth-child(2) {
+.navst a:nth-child(2) {
 	width: 110px;
 }
-a:nth-child(3) {
-	width: 100px;
-}
-a:nth-child(4) {
-	width: 110px;
-}
-nav .start-home, a:nth-child(1):hover~.animation {
+
+.navst .start-home, a:nth-child(1):hover~.animation {
 	width: 100px;
 	left: 0;
 	text-decoration: none;
 	color:white
 }
-nav .start-about, a:nth-child(2):hover~.animation {
+.navst .start-about, a:nth-child(2):hover~.animation {
 	width: 100px;
 	left: 120px;
 	background-color: #e74c3c;
 }
-nav .start-blog, a:nth-child(3):hover~.animation {
+.navst .start-blog, a:nth-child(3):hover~.animation {
 	width: 100px;
-	left: 220px;
+	left: 230px;
 	background-color: #3498db;
 }
-nav .start-portefolio, a:nth-child(4):hover~.animation {
-	width: 100px;
-	left: 250px;
+.navst .start-portefolio, a:nth-child(4):hover~.animation {
+	width: 140px;
+	left: 310px;
 	background-color: #9b59b6;
 }
 body {

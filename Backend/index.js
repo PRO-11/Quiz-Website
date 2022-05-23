@@ -5,31 +5,44 @@ const express = require("express")
 const User = require('./Models/User');
 const quiz = require('./Models/quiz');
 const app = express();
+var path = require('path')
 var cors = require('cors');
-
 app.use(cors())
 app.use(express.json())
+
 app.use('/auth', require('./Routes/Auth/auth'));
-app.use('/admin', require('./Routes/Admin/admin'));
-app.use('/user', require('./Routes/User/user'))
-if(process.env.NODE_ENV=="production")
-{
-   app.use(express.static("frontend/build"))
-}
+app.use('/adminbackend', require('./Routes/Admin/admin'));
+app.use('/userbackend', require('./Routes/User/user'))
+// if(process.env.NODE_ENV=="production")
+// {
+//    app.use(express.static("frontend/build"))
+//    app.get("/*", function(req, res) {
+//       res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// }
+if(process.env.NODE_ENV === "production") {
+   app.use(express.static("frontend/build"));
+   app.get("/*", function(req, res) {
+       res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
+     }); }
+     
 const PORT=process.env.PORT ||5000;
 app.listen(PORT, () => {
    console.log(`http://localhost:${PORT}`);
 })
 const updatee=async(id,quizid)=>{
+   quizid=quizid.replaceAll('"', '')
+   id=id.replaceAll('"', '')
+   console.log(id,quizid)
    await User.updateOne({ _id:id }, { $push: { quiz: { "quiz_id": quizid, "marks": 0 } } });
 }
-const setquizmarks = async(id, classs) => {
-   
+const setquizmarks = async(id, classs) => { 
    let user = await User.find({ class: classs });
    user.forEach((element) => {
       let flag = 0;
       element.quiz.forEach((element1) => {
+         id=id.replaceAll('"', '')
          if ((element1.quiz_id )=== id) {
+            console.log(element1.quiz_id)
             flag = 1;
          }
       })
@@ -62,7 +75,7 @@ function gettime(start,end)
 let endmin=end-endhr*60;
 let hrst= Number(start.substring(0, 2));
 let minst=Number(start.substring(3, 5));
-let secst = start.substring(6, 8);
+let secst = "05"
 
 endmin=(endmin+minst);
 let flag=0;
@@ -120,14 +133,12 @@ const checkquiz = async () => {
      
      let date1 = new Date().toLocaleString();
      date1 = calculate(date1);
-     
      let time1=gettime(start.toISOString().substring(11,19),end);
      let dtchg=time1.dtchg;
     if(dtchg){
       start1=changedate(start1)
      }
      time1=time1.end
-   //   console.log(time1);
      let hour = new Date().getHours()
      let min = new Date().getMinutes()
      let sec = new Date().getSeconds()
@@ -141,7 +152,8 @@ const checkquiz = async () => {
          sec = '0' + sec;
       }
       let time2 = hour + ":" + min + ":" + sec;
-      if(element.quizname=="Motion")
+       
+      // console.log(time1,time2);
       if (start1 == date1&&time1 == time2) {
          id=JSON.stringify(element._id)
          setquizmarks(id, element.class);

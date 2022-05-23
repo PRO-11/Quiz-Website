@@ -35,7 +35,7 @@ function Viewquizitem(props) {
                 <label className="radio"> Correct : {Correct}</label>
               </div>
               <div className='d-flex justify-content-end' style={{ "background": "burlywood" }}>
-                <button type="submit" className="w-25 bg-info" onClick={()=>{updateQues(props.index,_id)}}>Update Ques</button>
+                <button type="submit" className="w-23 bg-info" onClick={()=>{updateQues(props.index,_id)}}>Update Ques</button>
               </div>
             </div>
 

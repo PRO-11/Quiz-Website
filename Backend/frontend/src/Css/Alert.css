@@ -1,7 +1,7 @@
 #loginusr{
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
     font-size: 1.3em;
     left: 0;
 }

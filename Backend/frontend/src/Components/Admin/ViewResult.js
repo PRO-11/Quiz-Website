@@ -16,7 +16,7 @@ function ViewResult() {
     else{
       _id=location.state._id;
       classs=location.state.classs
-        const response1 = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend/viewresults", {
+        const response1 = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewresults", {
             method: 'POST',
             headers: {
                 'auth-token':localStorage.getItem('adtoken'),

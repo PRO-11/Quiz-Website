@@ -12,7 +12,8 @@
     background: linear-gradient(-30deg,#03a9f4 0%,#3a78b7 50%,
     #262626 50%,#607d8b 100%);
     animation: animate 10s linear infinite;
-    /* filter: hue-rotate(120deg); */
+   
+     filter: hue-rotate(120deg); 
 }
 @keyframes animate {
     
@@ -146,4 +147,4 @@ color: #ffff;
     font-weight: 300;
     font-size: 15px;
     margin-top: 5px;
-}
+} 

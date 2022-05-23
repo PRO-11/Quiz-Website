@@ -4,6 +4,7 @@ import '../../Css/QuizCard.css'
 function QuizItem(props) {
   const { quiz_id, admin, quiz, start, end, subname, quizname, classs, totalmarks } = props.quiz;
   const gettime = props.gettime;
+  const disab=props.disab
   const changedate = props.changedate;
   const user = props.user
   const [enablebt, setenable] = useState(0);
@@ -12,7 +13,7 @@ function QuizItem(props) {
   let starttime = start.substring(11, 19)
   useEffect(async () => {
     if (start) {
-
+         
       let startdaa = startda + " " + starttime;
       let startdate = new Date(startdaa)
       let endti = gettime(start, end)
@@ -41,6 +42,10 @@ function QuizItem(props) {
         }
 
       })
+      if(disab===1)
+      {
+      setenable(0)
+      }
     }
   }, [])
 

@@ -43,7 +43,7 @@ function Createquiz(props) {
       quiz: ans
     }
     
-    const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend/createquiz", {
+    const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/createquiz", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function Createquiz(props) {
   return (
     <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
       <Navbar name={name}/>
-      <Alert alert={props.alert} page="loginusr"/>
+      <Alert alert={props.alert} page="userhome"/>
     <div id="admincreate" className='"d-flex justify-content-center"'>
       <div className="bgadmin"></div>
       <div className="d-flex justify-content-center row my-1">

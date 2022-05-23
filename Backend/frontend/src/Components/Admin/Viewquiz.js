@@ -15,7 +15,7 @@ function Viewquiz(props) {
     const [start, setstart] = useState({});
     const [obj, setobj] = useState({ "Ques": " ", "Option1": " ", "Option2": " ", "Option3": " ", "Option4": " ", "Correct": " ", "Marks": " " })
     const getallQues = async () => {
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend/viewquiz", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewquiz", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ function Viewquiz(props) {
             body: JSON.stringify({ "quiz_id": id })
         })
         const json = await response.json();
-        setstart({"start":json.start,"end":json.end})
+        setstart({"start":" ","end":json.end})
         setquiz(json.quiz)
     }
     const updatedate=async()=>{
@@ -39,12 +39,12 @@ function Viewquiz(props) {
         {
             props.showalert("Failed","Time should be in Integer")
         //   props.showalert("Failed","Time should be in Integer")
-          return
+          return;
         }
         if(!start.start.includes(":00.000Z"))
            start.start= start.start+":00.000Z"
            
-           const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend/updatedate", {
+           const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updatedate", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function Viewquiz(props) {
             "Marks": obj.Marks,
             "Correct": obj.Correct
         }
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend/updateques", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updateques", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -177,7 +177,7 @@ function Viewquiz(props) {
                 <label htmlFor="End" className='my-3' style={{"border": "2px solid cornsilk","background": "cornsilk","borderRadius": "3px","height":"2rem"}}>Time Limit In Minutes</label>
                 <input  type="text" className="my-3  mx-3 " style={{"background":"cornsilk","height":"2rem"}} name="end"  value={start.end}  required onChange={onchange} id="end"  />
     
-              <input type="submit" style={{"background":"aqua","height":"2.5rem"}} className='my-3'  onClick={updatedate} value="Update Date and Time"/>
+              <input type="button"  style={{"background":"aqua","height":"2.5rem"}} className='my-3'  onClick={updatedate} value="Update Date and Time"/>
 
             </div>
             </form>

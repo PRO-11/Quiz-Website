@@ -8,7 +8,7 @@ function Createadmin(props) {
   const [credentials, setcred] = useState({ user_id: "", password: " ", name: ""})
   const handleSubmit = async (e) => {
       e.preventDefault();
-      const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/auth/createadmin", {
+      const response = await fetch("https://pro-quizz.herokuapp.com/auth/createadmin", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'

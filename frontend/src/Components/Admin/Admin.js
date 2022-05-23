@@ -89,7 +89,7 @@ function Admin(props) {
   const [adname, setadname] = useState("null")
   useEffect(async () => {
     if (localStorage.getItem('adtoken')) {
-      const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin", {
+      const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend", {
         method: 'GET',
         headers: {
           'auth-token': localStorage.getItem('adtoken')
@@ -98,19 +98,20 @@ function Admin(props) {
       const json = await response.json();
       setadname(json.admin.name)
       setadquiz(json.ans);
+      document.title="Quizzing-Admin"
     }
     else {
       history.push('./loginadmin')
     }
   }, []);
   return (
-<>
-      <NavbarAdmin name={adname} />
-      <Alert alert={props.alert} page="userhome" />
-      <div className="bg"></div>
+ <div  className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","width":"100%" }} >
+<div className="bgadmin"></div>
+        <NavbarAdmin name={adname} /> 
+       <Alert alert={props.alert} page="userhome" /> 
     
-      <div className='container ' style={{ "marginTop": "60px" }}>
-          <h2 style={{"color":"white"}}>Upcoming Quizes</h2>
+       <div className='container ' style={{ "marginTop": "60px","marginLeft":"50px" }}>
+          <h2 style={{"color":"white"}} className="my-5">Upcoming Quizes</h2>
           <div className='container'>
             <div className='row'>
               {adquiz.map((quiz) => {
@@ -134,16 +135,14 @@ function Admin(props) {
               })}
             </div>
           </div>
-        </div>
-
-
+        </div>  
       <div className="star-field">
         <div className="layer"></div>
         <div className="layer"></div>
         <div className="layer"></div>
         </div>
         
-      </>
+      </div>
       )
 }
 

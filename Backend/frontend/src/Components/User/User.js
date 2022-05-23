@@ -3,11 +3,16 @@ import QuizItem from './QuizItem';
 import NavbarStudent from './NavbarStudent'
 import Alert from '../../Alert'
 import '../../Css/userhomepg.scss'
-import {useHistory} from "react-router-dom"
+import {useHistory, useLocation} from "react-router-dom"
 function User(props) {
   let history=useHistory()
+  let location=useLocation();
+  
+  
   const [userquiz,setuserquiz]=useState([]);
    const [user,setuser]=useState({});
+    const [past,setpast]=useState("null");
+    
    function gettime(start,end)
    {
     let endhr = Math.floor((end / 60));
@@ -66,7 +71,8 @@ function User(props) {
         let date=new Date();
         let flag=1;
         quiz.forEach((element)=>{
-          if(element.quiz_id===id){
+          if(element.quiz_id===id||element.quiz_id===past){
+   
              flag=0
            return 1;
            }
@@ -91,7 +97,8 @@ let anss = startdate + " " + starttime;
       let date=new Date();
       let flag=1;
       quiz.forEach((element)=>{
-        if(element.quiz_id===id){
+  
+        if(element.quiz_id===id||element.quiz_id==past){
            flag=0
          return 0;
          }
@@ -103,11 +110,8 @@ let anss = startdate + " " + starttime;
     }
       
    }
-useEffect(async () => {
-
- if(localStorage.getItem('token')){
- 
-  const response1 = await fetch("https://vaishnavi-quiz-website.herokuapp.com/userbackend", {
+   const getallquiz=async()=>{
+    const response1 = await fetch("https://pro-quizz.herokuapp.com/userbackend", {
       method: 'GET',
       headers: {
           'auth-token':localStorage.getItem('token')
@@ -117,8 +121,16 @@ useEffect(async () => {
   const json = await response1.json();
   setuser(json.userinfo);
    setuserquiz(json.ans); 
+   }
+useEffect(async () => {
+ if(localStorage.getItem('token')){
+  if(location.state!=undefined){
+    setpast(location.state.detail)
+    getallquiz()
+    }
+     getallquiz()
    document.title="Quizzing-Student"
-}
+  }
 else{
 history.push('/loginuser')
 }
@@ -139,7 +151,7 @@ return()=>{
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user} changedate={changedate} gettime={gettime}/>
+     <QuizItem  quiz={quiz} user={user} changedate={changedate} gettime={gettime} disab={0}/>
     </div>}
     })} 
     </div>
@@ -149,7 +161,7 @@ return()=>{
             <div className='row'>
     {userquiz.map((quiz)=>{
      {return  check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)&& <div className="col md-4 my-2"  key={quiz.quiz_id}>
-     <QuizItem  quiz={quiz} user={user}  changedate={changedate} gettime={gettime}/>
+     <QuizItem  quiz={quiz} user={user}  changedate={changedate} gettime={gettime} disab={check1(quiz.start,quiz.end,user.quiz,quiz.quiz_id)}/>
     </div>}
     })} 
     </div>

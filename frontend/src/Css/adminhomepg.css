@@ -1,4 +1,4 @@
-.bg {
+.bgadmin {
     background: url(https://i.ibb.co/87GbbFP/2799006.jpg) no-repeat;
     background-size: cover;
     height: 100%;
@@ -8,17 +8,16 @@
     left: 0;
     z-index: -3;
 }
-.bg:before {
-    content: "";
+.bgadmin:before {
     width: 100%;
     height: 100%;
     background: #000;
     position: fixed;
-    z-index: -1;
+    z-index: -2;
     top: 0;
     left: 0;
     opacity: 0.3;
-}
+} 
 @keyframes sf-fly-by-1 {
     from {
         transform: translateZ(-600px);
@@ -57,7 +56,7 @@
     height: 100%;
     perspective: 600px;
     -webkit-perspective: 600px;
-    z-index: -1;
+    z-index: -2;
 }
 .star-field .layer {
     box-shadow: -411px -476px #cccccc, 777px -407px #d4d4d4, -387px -477px #fcfcfc, -91px -235px #d4d4d4, 491px -460px #f7f7f7, 892px -128px #f7f7f7, 758px -277px #ededed, 596px 378px #cccccc, 647px 423px whitesmoke, 183px 389px #c7c7c7,

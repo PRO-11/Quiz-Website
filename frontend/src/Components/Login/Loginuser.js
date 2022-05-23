@@ -11,7 +11,7 @@ function Loginuser(props) {
 const [credentials,setcred]=useState({user_id:"",password:" "})
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/auth/user/login", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/auth/user/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

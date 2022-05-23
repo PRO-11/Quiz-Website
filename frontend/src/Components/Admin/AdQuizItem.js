@@ -29,35 +29,42 @@ function AdQuizItem(props) {
     },[])
   
   return (
-    <div style={{width:'25em'}}>
-<div className="card" id="card">
-  <div className="card-body ">
-<div className="row">
-  <div className="col-md-6">Quizname: {quizname}</div>
-  <div className="col-md-6 my-2">Class:{classs}</div>
+    <div className='container'>
+<div className="card"  id="card">
+  <div className="card-body " style={{"fontSize":"1.3em"}}>
+    <div className="container">
+    <div className="d-flex justify-content-between my-3">
+  <div >Quizname: {quizname}</div>
+  <div >Class:{classs}</div>
 </div>
-
-<div className="row">
-  <div className="col-md-6 my-2">Subject:{ sub_name}</div>
-       <div className="col-md-6 my-2">Time Limit: {end} Minutes</div>
 </div>
-
-    <div className="row">   
-       <div className="col-md-6 my-2">Start Date: {startda}</div>
-<div className="col-md-6 my-2">Start Time :{starttime}</div>
+<div className="container">
+<div className="d-flex justify-content-between my-3">
+  <div >Subject:{ sub_name}</div>
+       <div >Time Limit: {end} Minutes</div>
+</div>
+</div>
+<div className="container">
+<div className="d-flex justify-content-between my-3">
+       <div >Start Date: {startda}</div>
+<div >Total Marks: {totalmarks}</div>
         </div>
-<div className="row">
-<div className="col-md-6 my-2">Total Marks: {totalmarks}</div>
+        </div>
+<div className="container">
+<div className="d-flex justify-content-between my-3">
+<div >Start Time :{starttime}</div>
 </div>
-<div className="row">
-<Link className="col-md-4 my-2" id="resultbt" to={{pathname:"/admin/viewquiz",state:{id:_id,name:adname}}} >View Quiz</Link>
-  {(enableview==1)&&<Link className="col-md-4 my-2 mx-5" id="resultbt" to={{
+</div>
+<div className="container">
+<div className="d-flex justify-content-between my-3">
+<Link id="resultbt" to={{pathname:"/admin/viewquiz",state:{id:_id,name:adname}}} >View Quiz</Link>
+  {(enableview==1)&&<Link  id="resultbt" to={{
     pathname: "/admin/viewresults",
     state: { _id,classs }
   }}>View Results</Link>}
   </div>
+  </div>
     </div>
-     
   </div> 
   </div>
 

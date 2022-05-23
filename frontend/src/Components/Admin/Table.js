@@ -7,8 +7,8 @@ function Table(props) {
     
   return (
     <>
-        <th  scope="row">{index}</th>
-        <th>{name}</th>
+        <td  scope="row">{index}</td>
+        <td>{name}</td>
         <td>{userid}</td>
         <td>{classs}</td>
         <td>{marks}</td>

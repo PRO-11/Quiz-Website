@@ -1,23 +1,18 @@
 
 #createquiz{
-    position: fixed;
-  top: 0;
-  left: 0;
+   
 
-  width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(-30deg,#03a9f4 0%,#3a78b7 50%,
-    #262626 50%,#607d8b 100%);
-    
+   font-size: 1.5em;
+    color: rgb(123, 255, 0);
 
 }
 #createquiz .box{
     position: absolute;
     padding: 50px;
-    top: 60px;
+    top: 30px;
     width: 360px;
     height: 550px;
     /* top:10pxx; */

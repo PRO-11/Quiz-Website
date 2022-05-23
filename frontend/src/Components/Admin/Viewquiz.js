@@ -3,6 +3,7 @@ import NavbarAdmin from './NavbarAdmin'
 import { useLocation, useHistory, Link } from 'react-router-dom';
 import Alert from '../../Alert'
 import Viewquizitem from './Viewquizitem';
+import '../../Css/adminhomepg.css'
 function Viewquiz(props) {
     let location = useLocation();
     let history = useHistory()
@@ -14,7 +15,7 @@ function Viewquiz(props) {
     const [start, setstart] = useState({});
     const [obj, setobj] = useState({ "Ques": " ", "Option1": " ", "Option2": " ", "Option3": " ", "Option4": " ", "Correct": " ", "Marks": " " })
     const getallQues = async () => {
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin/viewquiz", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewquiz", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ function Viewquiz(props) {
             body: JSON.stringify({ "quiz_id": id })
         })
         const json = await response.json();
-        setstart({"start":json.start,"end":json.end})
+        setstart({"start":" ","end":json.end})
         setquiz(json.quiz)
     }
     const updatedate=async()=>{
@@ -38,12 +39,12 @@ function Viewquiz(props) {
         {
             props.showalert("Failed","Time should be in Integer")
         //   props.showalert("Failed","Time should be in Integer")
-          return
+          return;
         }
         if(!start.start.includes(":00.000Z"))
            start.start= start.start+":00.000Z"
            
-           const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin/updatedate", {
+           const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updatedate", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ function Viewquiz(props) {
             "Marks": obj.Marks,
             "Correct": obj.Correct
         }
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin/updateques", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updateques", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +101,10 @@ function Viewquiz(props) {
         setobj({ "Ques": quiz[index].Ques, "Option1": quiz[index].Option1, "Option2": quiz[index].Option2, "Option3": quiz[index].Option3, "Option4": quiz[index].Option4, "Correct": quiz[index].Correct, "Marks": quiz[index].Marks })
     }
     return (
-        <section style={{ "position": "absolute", "top": "0", "left": "0px", "width": "100%", "minHeight": "100vh", background: "linear-gradient(#e66465, #9198e5)" }} >
+        <div className="d-flex flex-column bd-highlight mb-3" style={{ "position": "absolute","top":"0","left":"0","right":"0","width":"100%","minHeight": "100vh" }} >
+            <NavbarAdmin name={adname} />
+       <div className="bgadmin"></div>
+         <div style={{ "position": "absolute", "top": "0", "left": "0px", "minWidth": "100vw", "minHeight": "100vh" }} > 
             <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
@@ -112,11 +116,10 @@ function Viewquiz(props) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body" style={{ "background": "burlywood" }}>
-                            <form className="d-flex flex-column">
-                                <div className="question  p-3 border-bottom" style={{ "background": "burlywood" }}>
+                        <form className="question  p-3 border-bottom" style={{"background":"burlywood"}}>
                                     <div className="d-flex flex-row align-items-center question-title">
                                         <h3 className="text-danger">Q.</h3>
-                                        <textarea value={obj.Ques} className="mt-1 ml-2" rows="3" cols="80" placeholder='Enter Your Ques' onChange={handlechg} name="Ques" id="Ques" required></textarea>
+                                        <textarea value={obj.Ques} className="form-control"  rows="3" placeholder='Enter Your Ques' onChange={handlechg} name="Ques" id="Ques" required></textarea>
                                     </div>
                                     <div className="ans ml-2 my-3">
                                         <label className="radio"> Option 1: <input type='text' name="Option1" id="Option1" value={obj.Option1} onChange={handlechg} required /></label>
@@ -154,7 +157,7 @@ function Viewquiz(props) {
                                             </select>
                                         </label>
                                     </div>
-                                </div>
+                                
                             </form>
                         </div>
                         <div className="modal-footer" style={{ "background": "antiquewhite" }}>
@@ -164,25 +167,34 @@ function Viewquiz(props) {
                     </div>
                 </div>
             </div>
-
-
-            <NavbarAdmin name={adname} />
             <Alert alert={props.alert} page="userhome"/>
-            <div className="inputBx" style={{ "marginTop": "50px" }}>
-                <label htmlFor="start"   style={{"border": "2px solid cornsilk","background": "cornsilk","borderRadius": "3px","marginLeft":"70px"}}>Start Date</label>
-                <input  type="datetime-local" style={{"background":"cornsilk"}} className="mx-2"name="start" value={start.start}  required onChange={onchange} id="start" />
-                <label htmlFor="End" className='mx-3' style={{"border": "2px solid cornsilk","background": "cornsilk","borderRadius": "3px"}}>Time Limit In Minutes</label>
-                <input  type="text" className="my-3 mx-2" style={{"background":"cornsilk"}} name="end"  value={start.end}  required onChange={onchange} id="end"  />
-              <input type="submit" style={{"background":"aqua"}} className="mx-5" onClick={updatedate} value="Update Date and Time"/>
+            
+             <form style={{"display":"flex","alignItems":"center","width":"100%","marginTop":"80px"}}>
+             <div style={{"flex":"2","marginRight":"4px","marginLeft":"80px","fontSize":"1.2em"}}>
+                <label htmlFor="start"   style={{"border": "2px solid cornsilk","background": "cornsilk","borderRadius": "3px","height":"2rem"}} className='my-3'>Start Date & Time</label>
+                <input  type="datetime-local" style={{"background":"cornsilk","height":"2rem"}} name="start" value={start.start} className=' mx-3' required onChange={onchange} id="start" />
+              
+                <label htmlFor="End" className='my-3' style={{"border": "2px solid cornsilk","background": "cornsilk","borderRadius": "3px","height":"2rem"}}>Time Limit In Minutes</label>
+                <input  type="text" className="my-3  mx-3 " style={{"background":"cornsilk","height":"2rem"}} name="end"  value={start.end}  required onChange={onchange} id="end"  />
+    
+              <input type="button"  style={{"background":"aqua","height":"2.5rem"}} className='my-3'  onClick={updatedate} value="Update Date and Time"/>
+
             </div>
-            {quiz.map((element, index) => {
-                return <div className="container my-2" key={index}>
+            </form>
+            
+        {quiz.map((element, index) => {
+                return <div className="container my-2" key={index} >
                     <Viewquizitem quiz={element} index={index} updateQues={updateQues} />
                 </div>
             })
             }
-
-        </section>
+            </div> 
+<div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
+        </div>
+        </div>
     )
 }
 

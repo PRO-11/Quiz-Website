@@ -1,10 +1,12 @@
 import React,{useContext, useState,useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Alert from '../../Alert'
 import { useHistory } from 'react-router-dom'
 import '../../Css/createquiz.css'
+import NavbarAdmin from './NavbarAdmin';
 export default function Createquiz1(props) {
-  
+  const location=useLocation();
+  const name=location.state.name;
     const [clsub,setclsub]=useState({"class":"1","subject":"Maths"})
     let history=useHistory()
     const onchange=(e)=>{
@@ -33,14 +35,18 @@ export default function Createquiz1(props) {
       history.push({
          pathname: '/admin/createquiz2',
       search: '?query=abc',
-      state: {clsub} 
+      state: {clsub,name} 
     });
   }
     }
   return (
-   <section   id="createquiz">
-      <Alert  alert={props.alert} page="loginusr"/>
-        <div className="box">
+  <div className='d-flex flex-column'  style={{ "position": "absolute","top":"0","left":"0","width":"100%" ,"height":"100vh"}}>
+     <div className="bgadmin" ></div>
+    <NavbarAdmin name={name}/>
+      <Alert  alert={props.alert} page="userhome"/>
+      <div className="d-flex justify-content-center ">
+     <section id="createquiz" className='my-3'>
+        <div className="box my-5 ">
           <div className="form">
             <h2>QUIZ DETAILS</h2>
         <form onSubmit={handlesub}>
@@ -53,7 +59,7 @@ export default function Createquiz1(props) {
                 <input type="text" className="pad0" name="subject" placeholder='Enter Subject'  onChange={onchange} id="subject" required />
                  </div>
                  <div className="inputBx">
-                     <label style={{"fontSize":"18px"}}>Class</label>
+                     <label style={{"fontSize":"1.2em"}}>Class</label>
                  <select name="class" id="class" onChange={onchange} required>
                      <option value="1" default>I</option>
                      <option value="2">II</option>
@@ -82,8 +88,15 @@ export default function Createquiz1(props) {
             </div>
         </form>
         </div>
+ 
+ </div>
+   </section>
+   </div>
+        <div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
         </div>
- </section>
-   
+   </div>
   )
 }

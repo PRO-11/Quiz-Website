@@ -8,7 +8,7 @@ function Createuser(props) {
     const [credentials, setcred] = useState({ user_id: "", password: " ", name: "", class: "" })
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/auth/createuser", {
+        const response = await fetch("https://pro-quizz.herokuapp.com/auth/createuser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

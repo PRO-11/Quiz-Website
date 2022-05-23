@@ -89,7 +89,7 @@ function Admin(props) {
   const [adname, setadname] = useState("null")
   useEffect(async () => {
     if (localStorage.getItem('adtoken')) {
-      const response = await fetch("https://vaishnavi-quiz-website.herokuapp.com/adminbackend", {
+      const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend", {
         method: 'GET',
         headers: {
           'auth-token': localStorage.getItem('adtoken')

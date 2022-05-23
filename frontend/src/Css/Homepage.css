@@ -1,48 +1,35 @@
+
+
+
 /* html {
-  height:100%;
+  height:100vh;
+  color:white
 }
 
 body {
   margin:0;
-}
-*/
-#homepage .bghome {
+} */
+.bghome1{
   animation:slide 3s ease-in-out infinite alternate;
   background-image: linear-gradient(-20deg, red 50%, #000 50%);
   bottom:0;
   left:-100%;
-  opacity:.5;
+  opacity:.8;
   position:fixed;
   right:-50%;
   top:0;
   z-index:-1;
 }
 
-#homepage .bg2 {
+.bghome2{
   animation-direction:alternate-reverse;
   animation-duration:4s;
 }
 
-#homepage .bg3 {
+.bghome3{
   animation-duration:5s;
 }
 
-#homepage .content {
-  border-radius:.25em;
- 
-  box-sizing:border-box;
-  left:50%;
-  width: 50%;
-  padding:10vmin;
-  position:fixed;
-  top:50%;
-  transform:translate(-50%, -50%);
-}
-
-#homepage button {
-size: 90px;
-  font-family:monospace;
-}
 
 @keyframes slide {
   0% {
@@ -51,15 +38,10 @@ size: 90px;
   100% {
     transform:translateX(25%);
   }
-} 
+}
 
 
-
-
-
-
-
-
+ 
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
 
 :root {
@@ -69,7 +51,9 @@ size: 90px;
   --bg-color: #141218;
 }
 
-#homepage  button {
+
+
+#homepage button {
   position:relative;
   padding: 10px 20px;  
   border: none;
@@ -82,19 +66,19 @@ size: 90px;
   font-size: 30px;  
   color: var(--text-color);
   
-  background-color:#1399cd;
+  background-color: var(--btn-color);
   box-shadow: var(--shadow-color) 2px 2px 22px;
   border-radius: 4px; 
-  z-index: 2;  
+  z-index: 0;  
   overflow: hidden;   
 }
 
-#homepage  button:focus {
+#homepage button:focus {
   outline-color: transparent;
   box-shadow: var(--btn-color) 2px 2px 22px;
 }
 
-#homepage  .right::after, button::after {
+#homepage .right::after, button::after {
   content: var(--content);
   display: block;
   position: absolute;
@@ -103,19 +87,19 @@ size: 90px;
   pointer-events:none;
 }
 
-#homepage  button::after{
+#homepage button::after{
   font-weight: 200;
   top: -30px;
   left: -20px;
 } 
 
-#homepage  .right, .left {
+#homepage .right, .left {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
 }
-#homepage .right {
+#homepage.right {
   left: 66%;
 }
 #homepage .left {
@@ -131,20 +115,19 @@ size: 90px;
   transform: translate(0, -90%) rotate(0deg)
 }
 
-#homepage  button:hover .right::after {
+#homepage button:hover .right::after {
   transform: translate(0, -47%) rotate(0deg)
 }
 
-#homepage  button .right:hover::after {
+#homepage button .right:hover::after {
   transform: translate(0, -50%) rotate(-7deg)
 }
 
-#homepage  button .left:hover ~ .right::after {
+#homepage button .left:hover ~ .right::after {
   transform: translate(0, -50%) rotate(7deg)
 }
 
-/* bubbles */
-#homepage  button::before {
+#homepage button::before {
   content: '';
   pointer-events: none;
   opacity: .6;

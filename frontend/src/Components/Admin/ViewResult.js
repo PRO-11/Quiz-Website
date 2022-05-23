@@ -1,6 +1,6 @@
 import React, { useEffect,useState,useContext } from 'react'
 import Table from './Table';
-import '../../Css/Result.css'
+import '../../Css/Result.scss'
 import {useLocation,useHistory} from 'react-router-dom';
 function ViewResult() {
   const location = useLocation()
@@ -16,7 +16,7 @@ function ViewResult() {
     else{
       _id=location.state._id;
       classs=location.state.classs
-        const response1 = await fetch("https://vaishnavi-quiz-website.herokuapp.com/admin/viewresults", {
+        const response1 = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewresults", {
             method: 'POST',
             headers: {
                 'auth-token':localStorage.getItem('adtoken'),
@@ -30,9 +30,11 @@ function ViewResult() {
     }
     },[])
   return (
-<section id="result">
+<div className='container' id="result">
+<div className="bgadmin"></div>
+   <div className='container'>
       <h1>Results</h1><br/>
-      <article>
+    
            <table>
              <thead>
             <tr>
@@ -51,8 +53,13 @@ function ViewResult() {
     })}
       </tbody>
        </table>
-    </article>
-    </section>
+       </div>
+    <div className="star-field">
+        <div className="layer"></div>
+        <div className="layer"></div>
+        <div className="layer"></div>
+        </div>
+    </div>
 
   )
 }

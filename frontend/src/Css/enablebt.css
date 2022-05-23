@@ -3,8 +3,9 @@
     border: 2px solid red;
     border-radius: 4px;
     color: aqua;
-    margin-left: 10px;
+ /* margin-left: 10px; */
     text-decoration: none;
+    text-align: center;
 }
 #viewbt{
     background-color:blueviolet;
@@ -12,7 +13,8 @@
     border-radius: 4px;
     color: aqua;
     text-decoration: none;
+    
     text-align: center;
-    width: 42%;
-    margin-left: 43px;
+    /* width: 42%; */
+    /* margin-left: 43px; */
 }
