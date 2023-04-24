@@ -5,13 +5,14 @@ import userimg from '../../Images/user.png'
 import lockimg from '../../Images/lock .png'
 import Alert from '../../Alert'
 import '../../Css/Login.css'
+import {baseurl} from '../../BASEURL'
 function Loginuser(props) {
     let history=useHistory()
  
 const [credentials,setcred]=useState({user_id:"",password:" "})
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://pro-quizz.herokuapp.com/auth/user/login", {
+        const response = await fetch(`${baseurl}/auth/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

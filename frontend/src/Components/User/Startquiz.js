@@ -3,6 +3,7 @@ import { useLocation, useHistory, Link } from 'react-router-dom'
 import QuizContext from '../../Context/QuizContext';
 import Clock from './Clock'
 import Startquizques from './Startquizques'
+import {baseurl} from '../../BASEURL'
 function gettime(start,end)
    {
      let endhr = Math.floor((end / 60));
@@ -110,7 +111,7 @@ function Startquiz(props) {
            state: { detail:quiz_id }
 });
 mounted.current=false
-    const response = await fetch("https://pro-quizz.herokuapp.com/userbackend/submitquiz", {
+    const response = await fetch(`${baseurl}/userbackend/submitquiz`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

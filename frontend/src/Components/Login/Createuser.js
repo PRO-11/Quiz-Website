@@ -3,12 +3,13 @@ import { useHistory ,Link} from "react-router-dom"
 import userimg from '../../Images/user.png'
 import Alert from '../../Alert'
 import lockimg from '../../Images/lock .png'
+import {baseurl} from '../../BASEURL'
 function Createuser(props) {
     let history = useHistory();
     const [credentials, setcred] = useState({ user_id: "", password: " ", name: "", class: "" })
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://pro-quizz.herokuapp.com/auth/createuser", {
+        const response = await fetch(`${baseurl}/auth/createuser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

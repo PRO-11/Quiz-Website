@@ -4,6 +4,7 @@ import NavbarStudent from './NavbarStudent'
 import Alert from '../../Alert'
 import '../../Css/userhomepg.scss'
 import {useHistory, useLocation} from "react-router-dom"
+import {baseurl} from '../../BASEURL'
 function User(props) {
   let history=useHistory()
   let location=useLocation();
@@ -111,7 +112,7 @@ let anss = startdate + " " + starttime;
       
    }
    const getallquiz=async()=>{
-    const response1 = await fetch("https://pro-quizz.herokuapp.com/userbackend", {
+    const response1 = await fetch(`${baseurl}/userbackend`, {
       method: 'GET',
       headers: {
           'auth-token':localStorage.getItem('token')

@@ -5,6 +5,7 @@ import AdQuizItem from './AdQuizItem';
 import NavbarAdmin from './NavbarAdmin';
 import '../../Css/adminhomepg.css'
 import Alert from '../../Alert';
+import {baseurl} from '../../BASEURL'
 function gettime(start, end) {
   let endhr = Math.floor((end / 60));
   let endmin = end - endhr * 60;
@@ -89,7 +90,7 @@ function Admin(props) {
   const [adname, setadname] = useState("null")
   useEffect(async () => {
     if (localStorage.getItem('adtoken')) {
-      const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend", {
+      const response = await fetch(`${baseurl}/adminbackend`, {
         method: 'GET',
         headers: {
           'auth-token': localStorage.getItem('adtoken')

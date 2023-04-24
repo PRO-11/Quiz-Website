@@ -2,6 +2,7 @@ import React, { useEffect,useState,useContext } from 'react'
 import Table from './Table';
 import '../../Css/Result.scss'
 import {useLocation,useHistory} from 'react-router-dom';
+import {baseurl} from '../../BASEURL'
 function ViewResult() {
   const location = useLocation()
   let _id,classs 
@@ -16,7 +17,7 @@ function ViewResult() {
     else{
       _id=location.state._id;
       classs=location.state.classs
-        const response1 = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewresults", {
+        const response1 = await fetch(`${baseurl}/adminbackend/viewresults`, {
             method: 'POST',
             headers: {
                 'auth-token':localStorage.getItem('adtoken'),

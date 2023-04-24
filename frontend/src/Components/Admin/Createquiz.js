@@ -4,6 +4,7 @@ import '../../Css/createquiz1.css'
 import QuizContext from '../../Context/QuizContext';
 import Alert from '../../Alert';
 import Navbar from './NavbarAdmin';
+import {baseurl} from '../../BASEURL'
 function Createquiz(props) {
   const context = useContext(QuizContext);
   let { ans } = context;
@@ -43,7 +44,7 @@ function Createquiz(props) {
       quiz: ans
     }
     
-    const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/createquiz", {
+    const response = await fetch(`${baseurl}/adminbackend/createquiz`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { useLocation, useHistory, Link } from 'react-router-dom';
 import Alert from '../../Alert'
 import Viewquizitem from './Viewquizitem';
 import '../../Css/adminhomepg.css'
+import {baseurl} from '../../BASEURL'
 function Viewquiz(props) {
     let location = useLocation();
     let history = useHistory()
@@ -15,7 +16,7 @@ function Viewquiz(props) {
     const [start, setstart] = useState({});
     const [obj, setobj] = useState({ "Ques": " ", "Option1": " ", "Option2": " ", "Option3": " ", "Option4": " ", "Correct": " ", "Marks": " " })
     const getallQues = async () => {
-        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/viewquiz", {
+        const response = await fetch(`${baseurl}/adminbackend/viewquiz`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ function Viewquiz(props) {
         if(!start.start.includes(":00.000Z"))
            start.start= start.start+":00.000Z"
            
-           const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updatedate", {
+           const response = await fetch(`${baseurl}/adminbackend/updatedate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ function Viewquiz(props) {
             "Marks": obj.Marks,
             "Correct": obj.Correct
         }
-        const response = await fetch("https://pro-quizz.herokuapp.com/adminbackend/updateques", {
+        const response = await fetch(`${baseurl}/adminbackend/updateques`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
