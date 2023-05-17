@@ -24,7 +24,7 @@ function Home() {
     <div className="container-fluid text-center"
                 style={{"position":"fixed","bottom":"0","left":"0","right":"0","background": "linear-gradient(to right,#f7d914,#0cf2fa)","opacity":" 1","color":"black" ,"fontWeight": "500", "fontSize": "17px","padding": "7px 0 !important"}}
                 id="impt">
-                <div className="blinkk"> Developed By: Shobhit Shrivastava</div>
+                
             </div>
     </div>
     </div>
