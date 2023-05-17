@@ -19,12 +19,12 @@ app.use('/userbackend', require('./Routes/User/user'))
 //    app.get("/*", function(req, res) {
 //       res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // }
+console.log("Serve file",__dirname,path)
 if(process.env.NODE_ENV=='production'){
    const path = require('path')
-   console.log("Serve file")
    app.get('/',(req,res)=>{
        app.use(express.static(path.resolve(__dirname,'frontend','build')))
-       res.sendFile(path.resolve(__dirname,'frontend','build','index.html'))
+       res.sendFile(path.resolve(__dirname,'frrontend','build','index.html'))
    })
 }
      
